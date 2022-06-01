@@ -1,12 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const jobRouter = require("./routes/jobAdd");
 const authRouter = require("./routes/auth");
 const PORT = 3000;
 const app = express();
 app.use(express.json());
-const DB = "mongodb+srv://csc291:integratedproject@cluster0.v7zmd.mongodb.net/?retryWrites=true&w=majority";
 app.use(authRouter);
-
+app.use
+const DB = "mongodb+srv://csc291:integratedproject@cluster0.v7zmd.mongodb.net/?retryWrites=true&w=majority";
+app.use(jobRouter);
 mongoose
     .connect(DB)
     .then(() => {
