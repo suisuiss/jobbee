@@ -1,6 +1,6 @@
 const express = require('express');
 const jobRouter = express.Router();
-const Job = require('../models/job');
+const { Job } = require('../models/job');
 
 //add job
 jobRouter.post('/api/job/add', async (req, res) => {
@@ -27,10 +27,10 @@ jobRouter.post('/api/job/add', async (req, res) => {
 //search job
 jobRouter.get('/api/job/search', async (req, res) => {
     const query = {};
-    if(req.query.search){
-        query.position={
-            $regex:req.query.search,
-            $options:'i'
+    if (req.query.search) {
+        query.position = {
+            $regex: req.query.search,
+            $options: 'i'
         }
     }
 

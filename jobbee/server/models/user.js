@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { jobSchema } = require('./job');
 const userSchema = mongoose.Schema({
     firstName: {
         required: true,
@@ -65,7 +66,19 @@ const userSchema = mongoose.Schema({
     type:{
         type:String,
         default:"user"
-    }
+    },
+    favorite:[{
+        job: jobSchema,
+        quatity:{
+            type:Number
+        }
+    }],
+    applied:[{
+        job: jobSchema,
+        quantity:{
+            type:Number
+        }
+    }]
 
 });
 
