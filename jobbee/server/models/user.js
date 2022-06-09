@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 const { jobSchema } = require('./job');
 const userSchema = mongoose.Schema({
+    images:
+    {
+        type: String,
+        required: true
+    },
     firstName: {
         required: true,
         type: String,
@@ -56,27 +61,27 @@ const userSchema = mongoose.Schema({
     password: {
         required: true,
         type: String,
-        validate:{
-            validator:(value) => {
+        validate: {
+            validator: (value) => {
                 return value.length >= 8;
             },
-            message:"Please enter at least 8 characters"
+            message: "Please enter at least 8 characters"
         }
     },
-    type:{
-        type:String,
-        default:"user"
+    type: {
+        type: String,
+        default: "user"
     },
-    favorite:[{
+    favorite: [{
         job: jobSchema,
-        quatity:{
-            type:Number
+        quatity: {
+            type: Number
         }
     }],
-    applied:[{
+    applied: [{
         job: jobSchema,
-        quantity:{
-            type:Number
+        quantity: {
+            type: Number
         }
     }]
 
