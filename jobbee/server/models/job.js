@@ -5,18 +5,23 @@ const jobSchema = mongoose.Schema({
         required: true,
         trim: true
     },
-    images: [
+    images:
         {
             type: String,
             required: true
         }
-    ],
+    ,
     position: {
         type: String,
         required: true,
         trim: true
     },
     position: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    salary: {
         type: String,
         required: true,
         trim: true
@@ -44,7 +49,13 @@ const jobSchema = mongoose.Schema({
         required: true,
         trim: true
     },
+    location:{
+        type: String,
+        required: true,
+        trim: true
+    }
 
+    
 
 });
 const Job = mongoose.model("Job", jobSchema);
