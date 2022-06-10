@@ -48,6 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
       // Work('flutter dev', 'sd', 'logo', 'bkk,thailand'),
       // Work('flutter dev', 'sd', 'logo', 'bkk,thailand'),
     ];
+    
     var name = 'Nontakorn';
     //device width
     final deviceWidth = MediaQuery.of(context).size.width;
@@ -105,6 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget banner() {
     final TextStyle white = TextStyle(color: Colors.white, fontSize: 15);
+    final jobData = jobs![0];
     return jobs == null
         ? const Loader()
         : Container(
@@ -133,22 +135,22 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                       Image.network(jobs![0].logo, height: 75, width: 75),
+                       Image.network(jobData.images, height: 75, width: 75),
                       Container(
                           margin: EdgeInsets.only(right: 20, top: 20),
                           child: Text(
-                            jobs?.elementAt(0).salary ?? "",
+                            jobData.salary,
                             style: white,
                           ))
                     ],
                   ),
                   Text(
-                    jobs?.elementAt(0).position ?? "",
+                    jobData.position,
                     style: white,
                   ),
 
                   Text(
-                    jobs?.elementAt(0).location ?? "",
+                    jobData.location,
                     style: white,
                   ),
                   Container(
@@ -160,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         color: Colors.grey,
                         borderRadius: BorderRadius.all(Radius.circular(20)),
                       ),
-                      child: Text(jobs?.elementAt(0).fullOrPart ?? ""))
+                      child: Text(jobData.fullOrPart))
                 ],
               ),
             ),

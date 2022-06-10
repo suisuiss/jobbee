@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 class Work {
-  final String? id;
+  final String id;
   final String companyName;
-  final String logo;
+  final String images;
   final String position;
   final String salary;
   final String fullOrPart;
@@ -15,9 +15,9 @@ class Work {
 
   Work(
       {
-      this.id,
+      required this.id,
       required this.companyName,
-      required this.logo,
+      required this.images,
       required this.position,
       required this.salary,
       required this.fullOrPart,
@@ -31,7 +31,7 @@ class Work {
     return {
       'id':id,
       'companyName': companyName,
-      'logo': logo,
+      'images': images,
       'position': position,
       'salary': salary,
       'fullOrPart':fullOrPart,
@@ -45,9 +45,9 @@ class Work {
 
   factory Work.fromMap(Map<String, dynamic> map){
     return Work(
-      id: map['_id'],
+      id: map['_id'] ?? '',
       companyName: map['companyName'] ?? '', 
-      logo: map['images'] ?? '', 
+      images: map['images'] ?? '', 
       position: map['position'] ?? '', 
       salary: map['salary'] ?? '',
       fullOrPart: map['fullOrPart'] ?? '', 

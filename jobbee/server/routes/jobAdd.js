@@ -46,7 +46,7 @@ jobRouter.get('/api/job/search', async (req, res) => {
 
 jobRouter.get("/api/home-job", async (req, res) => {
     try {
-        let jobs = await Job.find({});
+        const jobs = await Job.find({});
         res.json(jobs);
     } catch (e) {
         res.status(500).json({ error: e.message });
