@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jobbee/account.dart';
+import 'package:jobbee/applied.dart';
 import 'package:jobbee/buttom.dart';
 import 'package:jobbee/loginScreen.dart';
 //import home screen
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       
-      home:HomeScreen(),
+      home:Applied(),
     );
   }
 }
