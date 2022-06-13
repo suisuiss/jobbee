@@ -60,9 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
     //device width
     final deviceWidth = MediaQuery.of(context).size.width;
      
-    return jobs == null 
-        ? const Loader()
-        : Scaffold(
+    return Scaffold(
             body: Container(
               child: Column(
                 children: [
@@ -111,13 +109,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget banner() {
     final TextStyle white = TextStyle(color: Colors.white, fontSize: 15);
-    final jobData = jobs![0];
-    return jobs == null
-        ? const Loader()
-        : Container(
+    
+    return  Container(
       height: 200,
-      child: PageView(
-        children: [
+      child: PageView.builder(
+        itemCount: jobs!.length,
+        itemBuilder: (context,index){
+          final jobData = jobs![index];
+        return 
           Container(
             margin: EdgeInsets.all(15),
             decoration: BoxDecoration(
@@ -172,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           )
-        ],
+        ;},
       ),
     );
   }
