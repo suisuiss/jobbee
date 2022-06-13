@@ -1,2 +1,2 @@
 import 'package:flutter/material.dart';
-String url = 'http://192.168.1.72:3000';
+String url = 'http://192.168.10.96:3000';

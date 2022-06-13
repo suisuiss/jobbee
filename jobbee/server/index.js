@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 app.use(authRouter);
 app.use(userRouter);
-const DB = "mongodb+srv://csc291:integratedproject@cluster0.v7zmd.mongodb.net/?retryWrites=true&w=majority";
+const DB = "mongodb://nonny:nonny223@cluster0-shard-00-00.v7zmd.mongodb.net:27017,cluster0-shard-00-01.v7zmd.mongodb.net:27017,cluster0-shard-00-02.v7zmd.mongodb.net:27017/?ssl=true&replicaSet=atlas-88c9ir-shard-0&authSource=admin&retryWrites=true&w=majority";
 app.use(jobRouter);
 mongoose
     .connect(DB)
@@ -17,6 +17,6 @@ mongoose
     })
     .catch((e) => { console.log(e); });
 
-app.listen(PORT, "0.0.0.0", () => {
+app.listen(PORT , () => {
     console.log('connected at port ' + PORT);
 });
