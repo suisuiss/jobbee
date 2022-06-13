@@ -23,10 +23,10 @@ class _AppliedState extends State<Applied> {
     var date = '2020-01-01';
     List<Work> appliedWork = [
         //work data
-      Work('flutter dev', 'sd', 'logo', 'bkk,thailand'),
-      Work('flutter dev', 'sd', 'logo', 'bkk,thailand'),
-      Work('flutter dev', 'sd', 'logo', 'bkk,thailand'),
-      Work('flutter dev', 'sd', 'logo', 'bkk,thailand'),
+      // Work('flutter dev', 'sd', 'logo', 'bkk,thailand'),
+      // Work('flutter dev', 'sd', 'logo', 'bkk,thailand'),
+      // Work('flutter dev', 'sd', 'logo', 'bkk,thailand'),
+      // Work('flutter dev', 'sd', 'logo', 'bkk,thailand'),
         
     ];
     final TextStyle white = TextStyle(color: Colors.white,
