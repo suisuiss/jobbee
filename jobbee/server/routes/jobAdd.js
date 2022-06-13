@@ -5,7 +5,7 @@ const { Job } = require('../models/job');
 //add job
 jobRouter.post('/api/job/add', async (req, res) => {
     try {
-        const { companyName, images, position, salary, fullOrPart, online, jobRes, benefits, companyDesc } = req.body;
+        const { companyName, images, position, salary, fullOrPart, online, jobRes, benefits, companyDesc,location } = req.body;
         let job = new Job({
             companyName,
             images,
@@ -15,7 +15,8 @@ jobRouter.post('/api/job/add', async (req, res) => {
             online,
             jobRes,
             benefits,
-            companyDesc
+            companyDesc,
+            location
         });
         job = await job.save();
         res.json(job);
@@ -42,4 +43,14 @@ jobRouter.get('/api/job/search', async (req, res) => {
         res.status(500).json({ error: e.message });
     }
 });
+
+jobRouter.get("/api/home-job", async (req, res) => {
+    try {
+        const jobs = await Job.find({});
+        res.json(jobs);
+    } catch (e) {
+        res.status(500).json({ error: e.message });
+    }
+})
+
 module.exports = jobRouter;
