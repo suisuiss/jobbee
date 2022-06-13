@@ -6,6 +6,7 @@ import 'package:jobbee/loginScreen.dart';
 //import home screen
 import 'package:jobbee/homeScreen.dart';
 import 'package:jobbee/nav.dart';
+import 'package:jobbee/searchResult.dart';
 
 var blue = Color.fromRGBO(57, 172,231, 100);
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       
-      home:Applied(),
+      home:SearchResult(),
     );
   }
 }
