@@ -28,7 +28,7 @@ class Work {
       required this.companyDesc,
       required this.location}
       );
-  Map<String, dynamic> toMap(){
+  Map<String , dynamic> toMap(){
     return {
       'id':id,
       'companyName': companyName,

@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 
 class HomeService {
   Future<List<Work>> fetchAllWorks(BuildContext context) async {
-    List<Work> workList = [];
+    List<Work>workList = [];
     try {
       http.Response res = await http.get(Uri.parse('$url/api/home-job'),
           headers: {'Content-Type': 'application/json; charset=UTF-8'});
