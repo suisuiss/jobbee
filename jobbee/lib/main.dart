@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jobbee/account.dart';
 import 'package:jobbee/applied.dart';
 import 'package:jobbee/buttom.dart';
+import 'package:jobbee/fetchingTest.dart';
 import 'package:jobbee/loginScreen.dart';
 //import home screen
 import 'package:jobbee/homeScreen.dart';
@@ -21,7 +22,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home:LoginScreen(),
+      home:
+      Test(),
 
     );
   }
