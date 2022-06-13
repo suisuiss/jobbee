@@ -16,15 +16,15 @@ class HomeService {
           response: res,
           context: context,
           onSuccess: () {
-            for (int i = 0; i<jsonDecode(res.body).length; i++) {
-              workList.add(
-                Work.fromJson(
-                  jsonEncode(
-                    jsonDecode(res.body[i])
-                  )
-                )
-              );
-            }
+            // for (int i = 0; i<jsonDecode(res.body).length; i++) {
+            //   workList.add(
+            //     Work.fromJson(
+            //       jsonEncode(
+            //         jsonDecode(res.body[i])
+            //       )
+            //     )
+            //   );
+            // }
           });
     } catch (e) {
       showSnackBar(context, e.toString());
