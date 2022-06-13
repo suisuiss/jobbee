@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:jobbee/account.dart';
+import 'package:jobbee/constant/constant.dart';
 import 'package:jobbee/model.dart/work.dart';
 //import navbar
 import 'package:jobbee/nav.dart';
@@ -8,7 +11,7 @@ import 'package:jobbee/buttom.dart';
 //import work model
 import 'package:jobbee/provider/loader.dart';
 import 'package:jobbee/services/homeService.dart';
- 
+import 'package:http/http.dart' as http;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -19,9 +22,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   //axios = axios
-  
-  List<Work>?jobs;
-  final HomeService homeService = HomeService();
+
+  // final HomeService homeService = HomeService();
   final InputDecoration textFormstyle = InputDecoration(
     border:
         OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -31,18 +33,18 @@ class _HomeScreenState extends State<HomeScreen> {
   //create fromkey
   final formKey = GlobalKey<FormState>();
 
-  @override
-  void initState() {
-    super.initState();
-    fetchAllWork();
- 
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   fetchAllWork();
 
-  fetchAllWork() async {
-    // // jobs = await homeService.fetchAllWorks(context);
-    // setState(() {});
-   
-  }
+  // }
+
+  // fetchAllWork() async {
+  //  jobs = await homeService.fetchAllWorks(context);
+  //   setState(() {});
+
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -53,70 +55,81 @@ class _HomeScreenState extends State<HomeScreen> {
     //   // Work('flutter dev', 'sd', 'logo', 'bkk,thailand'),
     //   // Work('flutter dev', 'sd', 'logo', 'bkk,thailand'),
     // ];
-    
 
-    
     var name = 'Nontakorn';
     //device width
     final deviceWidth = MediaQuery.of(context).size.width;
-     
+
     return Scaffold(
-            body: Container(
-              child: Column(
-                children: [
-                  Navbar(),
-                  Expanded(
-                    child: SingleChildScrollView(
-                        child: Column(children: [
-                      Container(
-                        height: 60,
-                        child: Padding(
-                          //padding left
-                          padding: EdgeInsets.only(left: 20),
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: RichText(
-                              text: TextSpan(
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                children: [
-                                  TextSpan(
-                                    text: 'Hello, $name',
-                                  ),
-                                  TextSpan(
-                                    text: '\nFind your dream job!',
-                                  ),
-                                ],
-                              ),
-                            ),
+      body: Container(
+        child: Column(
+          children: [
+            Navbar(),
+            Expanded(
+              child: SingleChildScrollView(
+                  child: Column(children: [
+                Container(
+                  height: 60,
+                  child: Padding(
+                    //padding left
+                    padding: EdgeInsets.only(left: 20),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: RichText(
+                        text: TextSpan(
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
                           ),
+                          children: [
+                            TextSpan(
+                              text: 'Hello, $name',
+                            ),
+                            TextSpan(
+                              text: '\nFind your dream job!',
+                            ),
+                          ],
                         ),
                       ),
-                      searchBox(),
-                      banner(),
-                      // fav(workData),
-                    ])),
+                    ),
                   ),
-                  isKeyboardOpen ? Buttom() : Container(),
-                ],
-              ),
+                ),
+                searchBox(),
+                banner(),
+                // fav(workData),
+              ])),
             ),
-          );
+            isKeyboardOpen ? Buttom() : Container(),
+          ],
+        ),
+      ),
+    );
   }
 
   Widget banner() {
+    var jobData = [];
     final TextStyle white = TextStyle(color: Colors.white, fontSize: 15);
-    
-    return  Container(
+    void fetchAllWorks() async {
+      var ur = Uri.parse('$url/api/home-job');
+      try {
+        var response = await http.get(ur);
+        setState(() {
+          jobData = jsonDecode(response.body);
+        });
+      } catch (e) {
+        print(e);
+      }
+    }
+
+    initState(e) {
+      fetchAllWorks();
+    }
+
+    return Container(
       height: 200,
-      child: PageView.builder(
-        itemCount: jobs!.length,
-        itemBuilder: (context,index){
-          final jobData = jobs![index];
-        return 
+      child: PageView(
+        children: [
           Container(
             margin: EdgeInsets.all(15),
             decoration: BoxDecoration(
@@ -126,52 +139,59 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               color: Color.fromARGB(255, 10, 57, 96),
             ),
-            child: Padding(
+            child: 
+            Padding(
               padding: const EdgeInsets.all(15.0),
               child: Column(
                 //cross align
                 crossAxisAlignment: CrossAxisAlignment.start,
-
-                children: [
+                
+                children:  [ 
+                for(var item in jobData)  
                   //1st
                   Row(
                     //space between
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                       Image.network(jobData.images, height: 75, width: 75),
-                      Container(
-                          margin: EdgeInsets.only(right: 20, top: 20),
-                          child: Text(
-                            jobData.salary,
+                    children: [ 
+                    
+                    Image.network(item['images'], height: 75, width: 75),
+                    Container(
+                    margin: EdgeInsets.only(right: 20, top: 20),
+                    child:
+                    
+                    Text(
+                      item['salary'],
                             style: white,
                           ))
                     ],
                   ),
+                  for(var item in jobData)
                   Text(
-                    jobData.position,
+                    item['position'],
                     style: white,
                   ),
-
+                  for(var item in jobData)
                   Text(
-                    jobData.location,
+                    item['location'],
                     style: white,
                   ),
+                  for(var item in jobData)
                   Container(
-                      //margin all
                       height: 19,
                       margin: EdgeInsets.all(5),
                       padding: EdgeInsets.only(left: 5, right: 5),
                       decoration: BoxDecoration(
                         color: Colors.grey,
                         borderRadius: BorderRadius.all(Radius.circular(20)),
-                      ),
-                      child: Text(jobData.fullOrPart))
-                ],
-              ),
+                      ),             
+                      child: 
+                      Text(item['fullOrPart']))
+                      
+        ]),
             ),
           )
-        ;},
+        ],
       ),
     );
   }
