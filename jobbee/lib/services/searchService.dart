@@ -1,39 +1,26 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:jobbee/constant/constant.dart';
-import 'package:jobbee/constant/errorhandling.dart';
-import 'package:jobbee/constant/utils.dart';
-import 'package:jobbee/model.dart/work.dart';
+import 'package:jobbee/model.dart/job.dart';
 import 'package:http/http.dart' as http;
-class SearchService{
-  Future<List<Work>> fetchSearchedProduct({
-    required BuildContext context,
-    required String searchQuery
-  }) async{
-    List<Work>workList=[];
-    try{
-      http.Response res = await http.get(Uri.parse('$url/api/job/search'),
-      headers: {
-        'Content-Type':'application/json; charset=UTF-8',
-      });
 
-      httpErrorHandle(response: res, 
-      context: context, 
-      onSuccess: (){
-        for(int i =0;i<jsonDecode(res.body).length;i++){
-          workList.add(
-            Work.fromJson(
-              jsonEncode(
-                jsonDecode(res.body)[i]
-              )
-            )
-          );
-        }
-      });
-    }catch(e){
-      showSnackBar(context, e.toString());
-      return workList;
+class SearchService {
+  static Future<List<Job>> getJobs(String query) async {
+    http.Response res = await http.get(Uri.parse('$url/api/home-job'),
+        headers: {'Content-Type': 'application/json; charset=UTF-8'});
+
+    if (res.statusCode == 200) {
+      final List jobs = json.decode(res.body);
+
+      return jobs.map((json) => Job.fromJson(json)).where((job) {
+        final position = job.position.toLowerCase();
+
+        final searchLower = query.toLowerCase();
+
+        return position.contains(searchLower);
+      }).toList();
+    } else {
+      throw Exception();
     }
-    return workList;
   }
 }
