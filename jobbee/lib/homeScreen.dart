@@ -8,7 +8,6 @@ import 'package:jobbee/buttom.dart';
 //import work model
 import 'package:jobbee/provider/loader.dart';
 import 'package:jobbee/services/homeService.dart';
- 
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -18,9 +17,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  //axios = axios
-  
-  List<Work>?jobs;
+  List<Work>? jobs;
   final HomeService homeService = HomeService();
   final InputDecoration textFormstyle = InputDecoration(
     border:
@@ -35,32 +32,29 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     fetchAllWork();
- 
   }
 
   fetchAllWork() async {
-    // // jobs = await homeService.fetchAllWorks(context);
-    // setState(() {});
-   
+    jobs = await homeService.fetchAllWorks(context);
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     final isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom == 0;
-    // List<Work> workData = [
-    //   // Work('flutter dev', 'sd', 'logo', 'bkk,thailand'),
-    //   // Work('flutter dev', 'sd', 'logo', 'bkk,thailand'),
-    //   // Work('flutter dev', 'sd', 'logo', 'bkk,thailand'),
-    //   // Work('flutter dev', 'sd', 'logo', 'bkk,thailand'),
-    // ];
-    
-
-    
+    List<Work> workData = [
+      // Work('flutter dev', 'sd', 'logo', 'bkk,thailand'),
+      // Work('flutter dev', 'sd', 'logo', 'bkk,thailand'),
+      // Work('flutter dev', 'sd', 'logo', 'bkk,thailand'),
+      // Work('flutter dev', 'sd', 'logo', 'bkk,thailand'),
+    ];
     var name = 'Nontakorn';
     //device width
     final deviceWidth = MediaQuery.of(context).size.width;
-     
-    return jobs == null 
+    for (int i = 0; i < workData.length; i++) {
+      print(workData[i].companyName);
+    }
+    return jobs == null
         ? const Loader()
         : Scaffold(
             body: Container(
@@ -99,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       searchBox(),
                       banner(),
-                      // fav(workData),
+                      fav(workData),
                     ])),
                   ),
                   isKeyboardOpen ? Buttom() : Container(),
@@ -115,66 +109,67 @@ class _HomeScreenState extends State<HomeScreen> {
     return jobs == null
         ? const Loader()
         : Container(
-      height: 200,
-      child: PageView(
-        children: [
-          Container(
-            margin: EdgeInsets.all(15),
-            decoration: BoxDecoration(
-              //border radius 20
-              borderRadius: BorderRadius.all(
-                Radius.circular(25),
-              ),
-              color: Color.fromARGB(255, 10, 57, 96),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Column(
-                //cross align
-                crossAxisAlignment: CrossAxisAlignment.start,
+            height: 200,
+            child: PageView(
+              children: [
+                Container(
+                  margin: EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                    //border radius 20
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(25),
+                    ),
+                    color: Color.fromARGB(255, 10, 57, 96),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Column(
+                      //cross align
+                      crossAxisAlignment: CrossAxisAlignment.start,
 
-                children: [
-                  //1st
-                  Row(
-                    //space between
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                       Image.network(jobData.images, height: 75, width: 75),
-                      Container(
-                          margin: EdgeInsets.only(right: 20, top: 20),
-                          child: Text(
-                            jobData.salary,
-                            style: white,
-                          ))
-                    ],
-                  ),
-                  Text(
-                    jobData.position,
-                    style: white,
-                  ),
+                      children: [
+                        //1st
+                        Row(
+                          //space between
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Image.network(jobData.images, height: 75, width: 75),
+                            Container(
+                                margin: EdgeInsets.only(right: 20, top: 20),
+                                child: Text(
+                                  jobData.salary,
+                                  style: white,
+                                ))
+                          ],
+                        ),
+                        Text(
+                          jobData.position,
+                          style: white,
+                        ),
 
-                  Text(
-                    jobData.location,
-                    style: white,
+                        Text(
+                          jobData.location,
+                          style: white,
+                        ),
+                        Container(
+                            //margin all
+                            height: 19,
+                            margin: EdgeInsets.all(5),
+                            padding: EdgeInsets.only(left: 5, right: 5),
+                            decoration: BoxDecoration(
+                              color: Colors.grey,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                            ),
+                            child: Text(jobData.fullOrPart))
+                      ],
+                    ),
                   ),
-                  Container(
-                      //margin all
-                      height: 19,
-                      margin: EdgeInsets.all(5),
-                      padding: EdgeInsets.only(left: 5, right: 5),
-                      decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                      ),
-                      child: Text(jobData.fullOrPart))
-                ],
-              ),
+                )
+              ],
             ),
-          )
-        ],
-      ),
-    );
+          );
   }
 
   Widget searchBox() {

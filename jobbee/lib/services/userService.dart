@@ -4,7 +4,6 @@ import 'package:jobbee/homeScreen.dart';
 import 'package:jobbee/provider/userProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:jobbee/constant/constant.dart';
 import 'package:jobbee/constant/errorhandling.dart';
 import 'package:jobbee/constant/utils.dart';
