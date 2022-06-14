@@ -56,6 +56,8 @@ class Work {
         location: map['location'] ?? '');
   }
 
+
   String toJson() => json.encode(toMap());
   factory Work.fromJson(String source) => Work.fromMap(json.decode(source));
+
 }
