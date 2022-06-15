@@ -5,7 +5,7 @@ import 'package:jobbee/main.dart';
 import 'package:http/http.dart' as http;
 import 'package:jobbee/services/userservice.dart';
 
-var blue = Color.fromRGBO(57, 172, 231, 100);
+final blue = Color.fromRGBO(57, 172, 231, 100);
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
