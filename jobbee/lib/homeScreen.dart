@@ -37,10 +37,12 @@ class _HomeScreenState extends State<HomeScreen> {
   fetchAllWork() async {
     jobs = await homeService.fetchAllWorks(context);
     setState(() {});
+     
   }
 
   @override
   Widget build(BuildContext context) {
+    
     final isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom == 0;
     List<Work> workData = [
       // Work('flutter dev', 'sd', 'logo', 'bkk,thailand'),
@@ -129,19 +131,28 @@ class _HomeScreenState extends State<HomeScreen> {
 
                       children: [
                         //1st
-                        Row(
-                          //space between
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Image.network(jobData.images, height: 75, width: 75),
-                            Container(
-                                margin: EdgeInsets.only(right: 20, top: 20),
-                                child: Text(
-                                  jobData.salary,
-                                  style: white,
-                                ))
-                          ],
+                        
+                        GestureDetector(
+                          onTap: () => {
+                            print('clicked on ' + jobData.companyName),
+                            //print type of jobData
+                            print(jobData.runtimeType),
+                            print(jobs.runtimeType)
+                          },
+                          child: Row(
+                            //space between
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Image.network(jobData.images, height: 75, width: 75),
+                              Container(
+                                  margin: EdgeInsets.only(right: 20, top: 20),
+                                  child: Text(
+                                    jobData.salary,
+                                    style: white,
+                                  ))
+                            ],
+                          ),
                         ),
                         Text(
                           jobData.position,

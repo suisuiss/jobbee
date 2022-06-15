@@ -52,7 +52,10 @@ class _AccountPageState extends State<AccountPage> {
                           width: deviceWidth*0.55,
                           child: RaisedButton(
                           
-                          onPressed: (() => print('pressed')),
+                          onPressed: (() => 
+                          //push name login
+                          Navigator.pushNamed(context, '/login')),
+                          
                           color: Colors.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
@@ -69,7 +72,9 @@ class _AccountPageState extends State<AccountPage> {
                         width: deviceWidth * 0.55,
                         child: RaisedButton(
                           color: blue,
-                          onPressed: (() => print('pressed')),
+                          onPressed: (() =>
+                          
+                          Navigator.pushNamed(context, '/signup')),
                            shape: RoundedRectangleBorder(
                            borderRadius: BorderRadius.circular(30.0),
                           ),
