@@ -74,7 +74,10 @@ class UserService {
       onSuccess: () async{
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString('x-auth-token', jsonDecode(res.body)['token']);
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>const HomeScreen()));
+        // Navigator.push(context, MaterialPageRoute(builder: (context)=>const HomeScreen()));
+        Navigator.pushReplacementNamed(context, '/home');
+         
+        
       });
     } catch (e) {
       showSnackBar(context, e.toString());
