@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:testproject/model/user.dart';
+import '../modell/user.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
