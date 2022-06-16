@@ -11,7 +11,7 @@ import 'package:jobbee/nav.dart';
 import 'package:jobbee/register.dart';
 import 'package:jobbee/searchResult.dart';
 
-var blue = Color.fromRGBO(57, 172,231, 100);
+var blue = Color.fromRGBO(57, 172, 231, 100);
 
 void main() {
   runApp(const MyApp());
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => AccountPage(),
-        '/login' :(context) => LoginScreen(),
+        '/login': (context) => LoginScreen(),
         '/signup': (context) => RegisterScreen(),
         '/home' :(context) => HomeScreen(),
         '/testhome':(context) => HomeContent(),
@@ -37,11 +37,6 @@ class MyApp extends StatelessWidget {
         '/search': (context) => SearchResult(),
         '/test' :(context) => HomeContent(),
       },
-      
-       
-     
-
     );
   }
 }
- 
