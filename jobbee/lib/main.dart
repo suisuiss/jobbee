@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:testproject/view/jobDetail.dart';
+import '../view/ProfilePage.dart';
 import 'package:jobbee/account.dart';
 import 'package:jobbee/applied.dart';
 import 'package:jobbee/buttom.dart';
