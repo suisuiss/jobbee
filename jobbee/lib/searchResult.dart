@@ -3,8 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:jobbee/buttom.dart';
 import 'package:jobbee/model.dart/job.dart';
 import 'package:jobbee/model.dart/work.dart';
+import 'package:jobbee/nav.dart';
 import 'package:jobbee/searchWidget.dart';
 import 'package:jobbee/services/searchService.dart';
 
@@ -59,6 +61,7 @@ class _SearchResultState extends State<SearchResult> {
                 },
               ),
             ),
+            Buttom()
           ],
         ),
       );
