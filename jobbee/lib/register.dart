@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 //import blue from login
 import 'package:jobbee/loginScreen.dart';
 import 'package:jobbee/services/userService.dart';
-
+//import dart io
+import 'dart:io';
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
 
@@ -67,9 +69,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
     email: emailController.text, 
     password: passwordController.text);
   }
+  File? _image;
+  Future pickImage() async {
+    try{
+      var image = await ImagePicker().pickImage(source: ImageSource.gallery);
+  if(image == null) return;
+  
+  final imageTemporary = File(image.path);
+  setState(() {
+    _image = imageTemporary;
+  });
+
+    }catch(e){
+      print(e);
+    }
+    
+  
+  }
 
   @override
   Widget build(BuildContext context) {
+   
     final deviceHeight = MediaQuery.of(context).size.height;
     final deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -82,11 +102,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: Column(children: [
                 Padding(
                   padding: EdgeInsets.only(bottom: 35, top: 35),
-                  child: Image.asset(
+                  
+                  child: IconButton(
+                    iconSize: 150,
+                    onPressed: () =>  pickImage(),
+                    icon :  
+                    _image!=null?
+                    Image.file(_image!)
+                    :Image.asset(
                     'assets/Icon.png',
                     height: 100,
                     width: 100,
                   ),
+                  ),
+                  //imageButton
+
+                 
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 18),

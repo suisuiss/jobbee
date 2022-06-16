@@ -51,9 +51,6 @@ class _HomeScreenState extends State<HomeScreen> {
     var name = 'Nontakorn';
     //device width
     final deviceWidth = MediaQuery.of(context).size.width;
-    for (int i = 0; i < workData.length; i++) {
-      print(workData[i].companyName);
-    }
     return jobs == null
         ? const Loader()
         : Scaffold(
@@ -135,7 +132,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             print('clicked on ' + jobData.companyName),
                             //print type of jobData
                             print(jobData.runtimeType),
-                            print(jobs.runtimeType)
+                            print(jobs.runtimeType),
+                            //navigate push name to jobdetail page
+                            Navigator.pushNamed(context, '/jobDetail',
+                            // arguments: jobData
+                            ),
+
                           },
                           child: Row(
                             //space between
