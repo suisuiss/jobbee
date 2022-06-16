@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 class Work {
-  final String?id;
+  final String? id;
   final String companyName;
   final String images;
   final String position;
@@ -56,8 +56,6 @@ class Work {
         location: map['location'] ?? '');
   }
 
-
   String toJson() => json.encode(toMap());
   factory Work.fromJson(String source) => Work.fromMap(json.decode(source));
-
 }

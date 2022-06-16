@@ -55,6 +55,4 @@ class Job {
         companyDesc: json['companyDesc'] ?? '',
         location: json['location'] ?? '');
   }
-
-  
 }
