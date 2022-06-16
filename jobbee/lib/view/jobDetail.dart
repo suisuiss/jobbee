@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:testproject/model/company.dart';
-import 'package:testproject/view/CompanyTab.dart';
-import 'package:testproject/view/DescriptionTab.dart';
+import '../modell/company.dart';
+import './CompanyTab.dart';
+import './DescriptionTab.dart';
 
 class jobDetail extends StatelessWidget {
   const jobDetail({Key? key}) : super(key: key);

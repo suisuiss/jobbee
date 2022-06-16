@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../model/company.dart';
+import '../modell/company.dart';
 
 class CompanyTab extends StatelessWidget {
   final company = CompanyInfo.myCompany;
