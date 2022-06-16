@@ -13,7 +13,6 @@ import 'package:http/http.dart' as http;
 class UserService {
   void signUpUser(
       {required BuildContext context,
-      required String image,
       required String firstName,
       required String lastName,
       required String phoneNo,
@@ -27,7 +26,6 @@ class UserService {
     try {
       User user = User(
           id: '',
-          image: image,
           firstName: firstName,
           lastName: lastName,
           phoneNo: phoneNo,
@@ -47,8 +45,8 @@ class UserService {
           response: res,
           context: context,
           onSuccess: () {
-            showSnackBar(context,
-                'Account created! Login with the same email and password');
+            showSnackBar(context, 'Account created!');
+            Navigator.pushReplacementNamed(context, '/home');
           });
     } catch (e) {
       showSnackBar(context, e.toString());
@@ -69,16 +67,16 @@ class UserService {
             'Content-Type': 'application/json; charset=UTF-8',
           });
       print(res.body);
-      httpErrorHandle(response: res, 
-      context: context, 
-      onSuccess: () async{
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        await prefs.setString('x-auth-token', jsonDecode(res.body)['token']);
-        // Navigator.push(context, MaterialPageRoute(builder: (context)=>const HomeScreen()));
-        Navigator.pushReplacementNamed(context, '/home');
-         
-        
-      });
+      httpErrorHandle(
+          response: res,
+          context: context,
+          onSuccess: () async {
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            await prefs.setString(
+                'x-auth-token', jsonDecode(res.body)['token']);
+            // Navigator.push(context, MaterialPageRoute(builder: (context)=>const HomeScreen()));
+            Navigator.pushReplacementNamed(context, '/home');
+          });
     } catch (e) {
       showSnackBar(context, e.toString());
     }

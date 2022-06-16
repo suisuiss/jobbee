@@ -31,11 +31,11 @@ class MyApp extends StatelessWidget {
         '/': (context) => AccountPage(),
         '/login': (context) => LoginScreen(),
         '/signup': (context) => RegisterScreen(),
-        '/home' :(context) => HomeScreen(),
-        '/testhome':(context) => HomeContent(),
-        '/applied' :(context) => Applied(),
+        '/home': (context) => HomeScreen(),
+        '/testhome': (context) => HomeContent(),
+        '/applied': (context) => Applied(),
         '/search': (context) => SearchResult(),
-        '/test' :(context) => HomeContent(),
+        '/test': (context) => HomeContent(),
       },
     );
   }

@@ -37,12 +37,10 @@ class _HomeScreenState extends State<HomeScreen> {
   fetchAllWork() async {
     jobs = await homeService.fetchAllWorks(context);
     setState(() {});
-     
   }
 
   @override
   Widget build(BuildContext context) {
-    
     final isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom == 0;
     List<Work> workData = [
       // Work('flutter dev', 'sd', 'logo', 'bkk,thailand'),
@@ -93,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                       ),
-                      searchBox(),
+                      // searchBox(),
                       banner(),
                       fav(workData),
                     ])),
@@ -131,7 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                       children: [
                         //1st
-                        
+
                         GestureDetector(
                           onTap: () => {
                             print('clicked on ' + jobData.companyName),
@@ -144,7 +142,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Image.network(jobData.images, height: 75, width: 75),
+                              Image.network(jobData.images,
+                                  height: 75, width: 75),
                               Container(
                                   margin: EdgeInsets.only(right: 20, top: 20),
                                   child: Text(
