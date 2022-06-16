@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jobbee/view/jobDetail.dart';
 import '../view/ProfilePage.dart';
 import 'package:jobbee/account.dart';
 import 'package:jobbee/applied.dart';
@@ -37,6 +38,8 @@ class MyApp extends StatelessWidget {
         '/applied': (context) => Applied(),
         '/search': (context) => SearchResult(),
         '/test': (context) => HomeContent(),
+        '/profile': (context) => ProfilePage(),
+        '/jobDetail': (context) => jobDetail(),
       },
     );
   }

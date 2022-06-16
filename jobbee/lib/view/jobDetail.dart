@@ -18,7 +18,9 @@ class jobDetail extends StatelessWidget {
             Icons.arrow_back_ios,
             color: Color(0xFF21202A),
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         title: Text(
           company.companyName,
@@ -134,7 +136,7 @@ class jobDetail extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12.0),
                 ),
                 child: Icon(
-                  Icons.bookmark_border,
+                  Icons.favorite,
                   color: Colors.black,
                 ),
               ),
@@ -143,7 +145,55 @@ class jobDetail extends StatelessWidget {
                 child: SizedBox(
                   height: 50.0,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      //show dialog
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text("Confirm"),
+                          content: Text(
+                              "Are you sure you want to apply for this job?"),
+                          actions: <Widget>[
+                            FlatButton(
+                              child: Text("Cancel"),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                            FlatButton(
+                              child: Text("Apply"),
+                              onPressed: () {
+                                Navigator.pop(context);
+
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    //duration 2
+                                    //green snackbar
+
+
+                                    SnackBar(
+                                      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
+                                 //floating behaviour
+                                  behavior: SnackBarBehavior.floating,
+                                  backgroundColor: Colors.blue,
+                                  duration: Duration(seconds: 2),
+                                  content: Text('application sent!',
+                                  textAlign: TextAlign.center
+                                  ,style: TextStyle(
+                                    fontSize: 20,
+                                    
+
+                                    //textalign center
+
+                                  ),),
+                                ));
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.black,
                       shape: RoundedRectangleBorder(

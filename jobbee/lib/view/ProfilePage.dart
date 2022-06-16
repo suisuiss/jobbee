@@ -12,8 +12,8 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('This is a Backbutton')));
+              
+              Navigator.pop(context);
             },
             icon: const Icon(
               Icons.arrow_back,

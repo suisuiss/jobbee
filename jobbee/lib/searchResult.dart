@@ -47,7 +47,9 @@ class _SearchResultState extends State<SearchResult> {
     setState(() => this.jobs = jobs);
   }
   @override
-  Widget build(BuildContext context)=>Scaffold(
+  Widget build(BuildContext context){
+      final isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom == 0;
+    return Scaffold(
     body: Column(
           children: <Widget>[
             buildSearch(),
@@ -61,11 +63,11 @@ class _SearchResultState extends State<SearchResult> {
                 },
               ),
             ),
-            Buttom()
+         isKeyboardOpen?    Buttom():Container()
           ],
         ),
       );
-
+  }
   Widget buildSearch() => SearchWidget(
         text: query,
         hintText: 'Search For Job Position',
