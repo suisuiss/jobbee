@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+ 
 import 'package:flutter/material.dart';
 
 class Buttom extends StatefulWidget {
@@ -10,42 +10,60 @@ class Buttom extends StatefulWidget {
 
 class _ButtomState extends State<Buttom> {
   @override
+  int _selectedIndex = 0;
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+      
+    });
+    Navigator.pushNamed(context, path[_selectedIndex]);
+  }
+
+  final path = ['/home', '/search', '/applied'];
+  
+  @override
   Widget build(BuildContext context) {
     return Container(
       child: BottomNavigationBar(
+        
     backgroundColor: Color.fromARGB(255, 221, 221, 221),
-    selectedItemColor: Colors.black,
+    selectedItemColor: Color.fromARGB(255, 98, 98, 98),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon:  Icon(
-             Icons.adb,
-              size: 45,
+            icon:  ImageIcon(
+              AssetImage('assets/homeIcon.png'),
+              size: 40,
                
             ),
             label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.add_circle_outline,
+              Icons.search,
               size: 43,
                
             ),
-            label: 'Community',
+            label: 'Search',
           ),
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.calendar_month,
+            icon: ImageIcon(
+              AssetImage('assets/applied.png'),
               size: 43,
                
             ),
             label: 'applied',
           ),
         ],
-        // currentIndex: _selectedIndex,
-        // selectedItemColor: Colors.grey[700],
-        // onTap: _onItemTapped,
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+        
       )
       
     );
   }
-}
+
+  
+
+    
+  }
+  

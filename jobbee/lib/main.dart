@@ -3,6 +3,7 @@ import 'package:jobbee/account.dart';
 import 'package:jobbee/applied.dart';
 import 'package:jobbee/buttom.dart';
 import 'package:jobbee/fetchingTest.dart';
+import 'package:jobbee/home.dart';
 import 'package:jobbee/loginScreen.dart';
 //import home screen
 import 'package:jobbee/homeScreen.dart';
@@ -30,7 +31,11 @@ class MyApp extends StatelessWidget {
         '/': (context) => AccountPage(),
         '/login': (context) => LoginScreen(),
         '/signup': (context) => RegisterScreen(),
-        '/home': (context) => HomeScreen(),
+        '/home' :(context) => HomeScreen(),
+        '/testhome':(context) => HomeContent(),
+        '/applied' :(context) => Applied(),
+        '/search': (context) => SearchResult(),
+        '/test' :(context) => HomeContent(),
       },
     );
   }
