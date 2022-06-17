@@ -2,7 +2,7 @@ import 'dart:convert';
 
 class User {
   final String id;
-
+  final List<String> images;
   final String firstName;
   final String lastName;
   final String phoneNo;
@@ -16,6 +16,7 @@ class User {
 
   User(
       {required this.id,
+      required this.images,
       required this.firstName,
       required this.lastName,
       required this.phoneNo,
@@ -30,6 +31,7 @@ class User {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
+      'images':images,
       'firstName': firstName,
       'lastName': lastName,
       'phoneNo': phoneNo,
@@ -46,6 +48,7 @@ class User {
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
       id: map['_id'] ?? '',
+      images: List<String>.from(map['images']),
       firstName: map['firstName'] ?? '',
       lastName: map['lastName'] ?? '',
       phoneNo: map['phoneNo'] ?? '',
