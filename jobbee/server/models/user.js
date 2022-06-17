@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 const { jobSchema } = require('./job');
 const userSchema = mongoose.Schema({
-    images:
-    {
-        type: String
-    },
+    images: [
+        {
+            required: true,
+            type: String
+        }],
     firstName: {
         required: true,
         type: String,

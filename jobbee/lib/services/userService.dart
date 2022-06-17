@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'dart:io';
+import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:flutter/material.dart';
 import 'package:jobbee/homeScreen.dart';
 import 'package:jobbee/provider/userProvider.dart';
@@ -13,6 +15,7 @@ import 'package:http/http.dart' as http;
 class UserService {
   void signUpUser(
       {required BuildContext context,
+      required  images,
       required String firstName,
       required String lastName,
       required String phoneNo,
@@ -24,8 +27,16 @@ class UserService {
       required String email,
       required String password}) async {
     try {
+      final cloudinary = CloudinaryPublic('dzxxq4dgq', 'trfqejym');
+      List<String> imageUrl = [];
+      for (int i = 0; i < images.length; i++) {
+        CloudinaryResponse response = await cloudinary.uploadFile(
+            CloudinaryFile.fromFile(images[i].path, folder: firstName));
+        imageUrl.add(response.secureUrl);
+      }
       User user = User(
           id: '',
+          images: imageUrl,
           firstName: firstName,
           lastName: lastName,
           phoneNo: phoneNo,

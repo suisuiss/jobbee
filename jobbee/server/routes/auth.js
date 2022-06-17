@@ -6,14 +6,14 @@ const jwt = require('jsonwebtoken');
 //signup
 authRouter.post('/api/signup', async (req, res) => {
     try {
-        const { firstName, lastName, phoneNo, basedOn, edLevel, eddetail, workEx, skill, email, password } = req.body;
+        const { images, firstName, lastName, phoneNo, basedOn, edLevel, eddetail, workEx, skill, email, password } = req.body;
         const existingUser = await User.findOne({ email });
         if (existingUser) {
             return res.status(400).json({ msg: 'This email is already exist.' });
         }
 
         let user = new User({
-
+            images,
             firstName,
             lastName,
             phoneNo,
