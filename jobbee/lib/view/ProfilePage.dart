@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import '../modell/user.dart';
+import 'package:jobbee/model.dart/user.dart';
+import 'package:jobbee/provider/userProvider.dart';
+import 'package:provider/provider.dart';
+
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final user = UserInfo.myUser;
+     final user = Provider.of<UserProvider>(context).user;
 
     return Scaffold(
       appBar: AppBar(
@@ -19,32 +22,34 @@ class ProfilePage extends StatelessWidget {
               Icons.arrow_back,
               color: Colors.black,
             )),
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xffFFFBFB),
         elevation: 0,
       ),
       body: ListView(
         physics: BouncingScrollPhysics(),
         children: [
           ProfileWidget(
-            imagePath: user.imagePath,
+            imagePath: user.images[0],
             onClicked: () async {},
           ),
           const SizedBox(
             height: 24,
           ),
-          buildName(user),
+           buildName(context),
           const SizedBox(height: 48),
-          buildAbout(user),
+          buildAbout(context),
         ],
       ),
     );
   }
 
 //Widget for text
-  Widget buildName(User user) => Column(
+  Widget buildName(BuildContext context) {
+    final user = Provider.of<UserProvider>(context).user;
+    return Column(
         children: [
           Text(
-            user.name,
+            user.firstName+' '+user.lastName,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
           ),
           Text(
@@ -56,9 +61,11 @@ class ProfilePage extends StatelessWidget {
             style: TextStyle(color: Colors.grey),
           )
         ],
-      );
+      );}
 
-  Widget buildAbout(User user) => Container(
+  Widget buildAbout(BuildContext context) { 
+    final user = Provider.of<UserProvider>(context).user;
+    return Container(
         padding: EdgeInsets.symmetric(horizontal: 48),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,7 +81,7 @@ class ProfilePage extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              user.address + '\n' + user.phone,
+              user.basedOn + '\n' + user.phoneNo,
               style: TextStyle(fontSize: 16, height: 1.4),
             ),
             const SizedBox(height: 8),
@@ -84,7 +91,7 @@ class ProfilePage extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              user.education + '\n' + user.educationInfo,
+              user.edLevel + '\n' + user.eddetail,
               style: TextStyle(fontSize: 16, height: 1.4),
             ),
             const SizedBox(height: 8),
@@ -94,13 +101,13 @@ class ProfilePage extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              user.experience,
+              user.workEx,
               style: TextStyle(fontSize: 16, height: 1.4),
             ),
           ],
         ),
       );
-}
+}}
 
 //class for profile pic
 class ProfileWidget extends StatelessWidget {
@@ -120,7 +127,7 @@ class ProfileWidget extends StatelessWidget {
         child: Stack(
       children: [
         buildImage(),
-        Positioned(bottom: 0, right: 4, child: buildEditIcon(color))
+       // Positioned(bottom: 0, right: 4,)) //child: buildEditIcon(color))
       ],
     ));
   }
