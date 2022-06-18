@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:jobbee/account.dart';
 import 'package:jobbee/model.dart/work.dart';
 //import navbar
 import 'package:jobbee/nav.dart';
@@ -7,7 +6,9 @@ import 'package:jobbee/nav.dart';
 import 'package:jobbee/buttom.dart';
 //import work model
 import 'package:jobbee/provider/loader.dart';
+import 'package:jobbee/provider/userProvider.dart';
 import 'package:jobbee/services/homeService.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -42,13 +43,14 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom == 0;
+
     List<Work> workData = [
       // Work('flutter dev', 'sd', 'logo', 'bkk,thailand'),
       // Work('flutter dev', 'sd', 'logo', 'bkk,thailand'),
       // Work('flutter dev', 'sd', 'logo', 'bkk,thailand'),
       // Work('flutter dev', 'sd', 'logo', 'bkk,thailand'),
     ];
-    var name = 'Nontakorn';
+    final user = Provider.of<UserProvider>(context).user;
     //device width
     final deviceWidth = MediaQuery.of(context).size.width;
     return jobs == null
@@ -77,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 children: [
                                   TextSpan(
-                                    text: 'Hello, $name',
+                                    text: 'Hello '+ user.firstName+' '+ user.lastName,
                                   ),
                                   TextSpan(
                                     text: '\nFind your dream job!',
