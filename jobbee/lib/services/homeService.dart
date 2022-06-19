@@ -25,4 +25,25 @@ class HomeService {
     }
     return workList;
   }
+
+  //  Future<List<Work>> GetJobById(BuildContext context) async {
+  //   List<Work> workList = [];
+  //   //'/api/job/:id'
+  //   try {
+  //     http.Response res = await http.get(Uri.parse('$url/api/job/:id'),
+  //         headers: {'Content-Type': 'application/json; charset=UTF-8'});
+  //     httpErrorHandle(
+  //         response: res,
+  //         context: context,
+  //         onSuccess: () {
+  //           for (int i = 0; i < jsonDecode(res.body).length; i++) {
+  //             workList.add(Work.fromJson(jsonEncode(jsonDecode(res.body)[i])));
+  //           }
+  //         });
+  //   } catch (e) {
+  //     showSnackBar(context, e.toString());
+  //   }
+  //   return workList;
+  // }
 }
+

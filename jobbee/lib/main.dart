@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
         '/search': (context) => SearchResult(),
         '/test': (context) => HomeContent(),
         '/profile': (context) => ProfilePage(),
-        '/jobDetail': (context) => jobDetail(),
+        '/jobDetail': (context) => JobDetail(),
       },
     );
   }
