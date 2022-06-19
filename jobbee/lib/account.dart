@@ -14,6 +14,7 @@ class _AccountPageState extends State<AccountPage> {
   Widget build(BuildContext context) {
     final deviceHeight = MediaQuery.of(context).size.height;
     final deviceWidth = MediaQuery.of(context).size.width;
+  
     return Scaffold(
       body: Center(
         child: Container(

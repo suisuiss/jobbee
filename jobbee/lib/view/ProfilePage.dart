@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:jobbee/model.dart/user.dart';
 import 'package:jobbee/provider/userProvider.dart';
 import 'package:provider/provider.dart';
+final blue = Color.fromRGBO(57, 172, 231, 100);
+
 
 
 class ProfilePage extends StatelessWidget {
@@ -65,9 +67,12 @@ class ProfilePage extends StatelessWidget {
 
   Widget buildAbout(BuildContext context) { 
     final user = Provider.of<UserProvider>(context).user;
+    //device width
+    final width = MediaQuery.of(context).size.width;
     return Container(
         padding: EdgeInsets.symmetric(horizontal: 48),
-        child: Column(
+        child: 
+        Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
@@ -104,11 +109,36 @@ class ProfilePage extends StatelessWidget {
               user.workEx,
               style: TextStyle(fontSize: 16, height: 1.4),
             ),
+            Center(
+              child: Padding(
+                //padding top and bottom
+                padding: const EdgeInsets.symmetric(vertical: 30),
+                child: button(width),
+              ),
+            )
           ],
         ),
       );
 }}
 
+  Widget button(deviceWidth) {
+    return Container(
+      height: 50,
+      width: deviceWidth * 0.5,
+      child: RaisedButton(
+        onPressed: () {
+          
+        },
+        color: blue,
+        textColor: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+        child: Text(
+          'LOGOUT',
+          style: TextStyle(fontSize: 20),
+        ),
+      ),
+    );
+  }
 //class for profile pic
 class ProfileWidget extends StatelessWidget {
   final String imagePath;

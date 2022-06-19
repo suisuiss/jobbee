@@ -131,13 +131,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
                         GestureDetector(
                           onTap: () => {
-                            print('clicked on ' + jobData.companyName),
+                            print (jobData.id),
                             //print type of jobData
-                            print(jobData.runtimeType),
-                            print(jobs.runtimeType),
+                            // print(jobData.runtimeType),
+                            // print(jobs.runtimeType),
+                            // print(jobData.id.runtimeType),
                             //navigate push name to jobdetail page
                             Navigator.pushNamed(context, '/jobDetail',
-                            // arguments: jobData
+                            arguments: jobData.id
                             ),
 
                           },
