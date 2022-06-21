@@ -20,7 +20,7 @@ class _AppliedState extends State<Applied> {
   Widget build(BuildContext context) {
     //screen width
     final deviceWidth = MediaQuery.of(context).size.width;
-    var date = '2020-01-01';
+    var date = '2022 / 12 /12';
     List<Work> appliedWork = [
       //work data
       // Work('flutter dev', 'sd', 'logo', 'bkk,thailand'),
@@ -41,6 +41,12 @@ class _AppliedState extends State<Applied> {
               child: Column(
                 children: [
                   //applied work
+                  Text('My applied jobs',
+                  style : TextStyle(
+                    fontSize: 20
+                  )
+                  
+                  ),
                   for (var i in appliedWork)
                     Container(
                       height: 170,

@@ -76,8 +76,8 @@ class ProfilePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'About',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+              'Disabitlity type :' + user.disType,
+              style: TextStyle(fontWeight:FontWeight.w600  , fontSize: 18),
             ),
             const SizedBox(height: 16),
             Text(
@@ -113,7 +113,7 @@ class ProfilePage extends StatelessWidget {
               child: Padding(
                 //padding top and bottom
                 padding: const EdgeInsets.symmetric(vertical: 30),
-                child: button(width),
+                child: button(width , context),
               ),
             )
           ],
@@ -121,13 +121,14 @@ class ProfilePage extends StatelessWidget {
       );
 }}
 
-  Widget button(deviceWidth) {
+  Widget button(deviceWidth , context) {
     return Container(
       height: 50,
       width: deviceWidth * 0.5,
       child: RaisedButton(
-        onPressed: () {
-          
+        onPressed: ( ) {
+           Navigator.of(context)
+        .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
         },
         color: blue,
         textColor: Colors.white,
