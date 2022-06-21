@@ -7,6 +7,7 @@ class User {
   final String lastName;
   final String phoneNo;
   final String basedOn;
+  final String disType;
   final String edLevel;
   final String eddetail;
   final String workEx;
@@ -21,6 +22,7 @@ class User {
       required this.lastName,
       required this.phoneNo,
       required this.basedOn,
+      required this.disType,
       required this.edLevel,
       required this.eddetail,
       required this.workEx,
@@ -36,6 +38,7 @@ class User {
       'lastName': lastName,
       'phoneNo': phoneNo,
       'basedOn': basedOn,
+      'disType': disType,
       'edLevel': edLevel,
       'eddetail': eddetail,
       'workEx': workEx,
@@ -53,6 +56,7 @@ class User {
       lastName: map['lastName'] ?? '',
       phoneNo: map['phoneNo'] ?? '',
       basedOn: map['basedOn'] ?? '',
+      disType: map['disType'] ?? '',
       edLevel: map['edLevel'] ?? '',
       eddetail: map['eddetail'] ?? '',
       workEx: map['workEx'] ?? '',

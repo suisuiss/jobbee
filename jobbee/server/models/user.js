@@ -26,6 +26,11 @@ const userSchema = mongoose.Schema({
         type: String,
         trim: true
     },
+    disType: {
+        required: true,
+        type: String,
+        trim: false
+    },
     edLevel: {
         required: true,
         type: String,

@@ -85,16 +85,25 @@ class _SearchResultState extends State<SearchResult> {
         });
       });
 
-  Widget buildJob(Job job) => ListTile(
-        leading: Image.network(
-          job.images,
-          fit: BoxFit.cover,
-          width: 50,
-          height: 50,
+  Widget buildJob(Job job) => 
+  
+  GestureDetector(
+    onTap: () => {
+          Navigator.pushNamed(context, '/jobDetail',
+                            arguments: job.id
+                            ),    
+    },
+    child: ListTile(
+          leading: Image.network(
+            job.images,
+            fit: BoxFit.cover,
+            width: 50,
+            height: 50,
+          ),
+          title: Text(job.position),
+          subtitle: Text(job.companyName+' '+job.location),
         ),
-        title: Text(job.position),
-        subtitle: Text(job.companyName+' '+job.location),
-      );
+  );
 }
 
   // @override

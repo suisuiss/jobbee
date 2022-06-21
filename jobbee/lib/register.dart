@@ -19,6 +19,7 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   // final imagesController = TextEditingController();
   //create firstname controller
+  var _currentItem;
   List<File> images = [];
   final firstnameController = TextEditingController();
   //create lastname controller
@@ -41,7 +42,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final educationLevelController = TextEditingController();
   //create educationDetail controller
   final educationDetailController = TextEditingController();
-
+  //disType
+  final disTypeController = TextEditingController();
   final InputDecoration textFormstyle = InputDecoration(
     border:
         OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -72,6 +74,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         lastName: lastnameController.text,
         phoneNo: phoneController.text,
         basedOn: basedOnController.text,
+        disType: _currentItem.toString(),
         edLevel: educationLevelController.text,
         eddetail: educationDetailController.text,
         workEx: experienceController.text,
@@ -104,6 +107,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var distype = [
+      'vision Impairment',
+      'deaf or hard of hearing',
+      'mental health conditions',
+      'intellectual disability',
+      'acquired brain injury',
+      'autism spectrum disorder',
+      'physical disability'
+    ];
     final deviceHeight = MediaQuery.of(context).size.height;
     final deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -261,6 +273,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         return null;
                       }),
                 ),
+                
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 18),
+                   child:  DropdownButtonFormField(
+                    items: distype.map((item) {
+                      return DropdownMenuItem(
+                        child: Text(item),
+                        value: item,
+                      );
+                    }).toList(),
+                    onChanged: (value) => setState(() {
+                      _currentItem = value;
+                      
+                    }),
+                    decoration: textFormstyle.copyWith(hintText: 'disability type'),
+                )),
+                   
+                   
+                      
+                  //dropdown  
+
+                  
                 Padding(
                   padding: const EdgeInsets.only(bottom: 18),
                   child: TextFormField(

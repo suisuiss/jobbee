@@ -9,6 +9,7 @@ class UserProvider extends ChangeNotifier {
       lastName: '',
       phoneNo: '',
       basedOn: '',
+      disType: '',
       edLevel: '',
       eddetail: '',
       workEx: '',

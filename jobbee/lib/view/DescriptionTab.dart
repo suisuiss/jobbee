@@ -10,7 +10,7 @@ class DescriptionTab extends StatelessWidget {
         children: <Widget>[
           SizedBox(height: 25.0),
           Text(
-            "About the Opportunity",
+            "Job Responsibilities",
             style: TextStyle(
               fontSize: 16.0,
               color: Color(0xFF21202A),
@@ -31,7 +31,7 @@ class DescriptionTab extends StatelessWidget {
           ),
           SizedBox(height: 25.0),
           Text(
-            "Job Responsbilities",
+            "Benefits",
             style: TextStyle(
               fontSize: 16.0,
               color: Color(0xFF21202A),

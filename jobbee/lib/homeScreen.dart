@@ -101,17 +101,23 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           );
   }
-
+  
+  
   Widget banner() {
     final TextStyle white = TextStyle(color: Colors.white, fontSize: 15);
-    final jobData = jobs![0];
+    final jobData = jobs!;
     return jobs == null
         ? const Loader()
-        : Container(
+        : 
+        
+
+
+        Container(
             height: 200,
             child: PageView(
               children: [
-                Container(
+                for (int i=0; i<3; i++)
+                Container(             
                   margin: EdgeInsets.all(15),
                   decoration: BoxDecoration(
                     //border radius 20
@@ -131,14 +137,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
                         GestureDetector(
                           onTap: () => {
-                            print (jobData.id),
+                            print (jobData[i].id),
                             //print type of jobData
                             // print(jobData.runtimeType),
                             // print(jobs.runtimeType),
                             // print(jobData.id.runtimeType),
                             //navigate push name to jobdetail page
                             Navigator.pushNamed(context, '/jobDetail',
-                            arguments: jobData.id
+                            arguments: jobData[i].id
                             ),
 
                           },
@@ -147,24 +153,24 @@ class _HomeScreenState extends State<HomeScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Image.network(jobData.images,
+                              Image.network(jobData[i].images,
                                   height: 75, width: 75),
                               Container(
                                   margin: EdgeInsets.only(right: 20, top: 20),
                                   child: Text(
-                                    jobData.salary,
+                                    jobData[i].salary,
                                     style: white,
                                   ))
                             ],
                           ),
                         ),
                         Text(
-                          jobData.position,
+                          jobData[i].position,
                           style: white,
                         ),
 
                         Text(
-                          jobData.location,
+                          jobData[i].location,
                           style: white,
                         ),
                         Container(
@@ -177,7 +183,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
                             ),
-                            child: Text(jobData.fullOrPart))
+                            child: Text(jobData[i].fullOrPart))
                       ],
                     ),
                   ),

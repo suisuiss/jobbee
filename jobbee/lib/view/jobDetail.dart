@@ -12,6 +12,9 @@ import 'package:jobbee/constant/errorhandling.dart';
 import 'package:jobbee/constant/utils.dart';
 import 'package:jobbee/model.dart/work.dart';
 import 'package:http/http.dart' as http;
+//import blue from instant
+ 
+final blue = Color.fromRGBO(57, 172, 231, 100);
 
 class JobDetail extends StatefulWidget {
   const JobDetail({Key? key}) : super(key: key);
@@ -151,7 +154,7 @@ class _JobDetailState extends State<JobDetail> {
                           ),
                           SizedBox(height: 20.0),
                           Text(
-                            jobDe.online,
+                            jobDe.position,
                             style: TextStyle(
                               fontSize: 16.0,
                               color: Color(0xFF21202A),
@@ -167,7 +170,27 @@ class _JobDetailState extends State<JobDetail> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(height: 25.0),
+                          SizedBox(height: 15.0),
+                          Center(
+                            child: Container(
+                              decoration: BoxDecoration(
+                               // border circular
+                                borderRadius: BorderRadius.circular(15.0),
+                                color: Color.fromARGB(255, 223, 223, 223),
+                                
+                              ),
+                              height: 23,
+                              width:  100,
+                              
+                              child: Text(jobDe.fullOrPart,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 15
+                              ),
+                              )
+                            ),
+                          ),
+                          SizedBox(height: 15.0),
                           Material(
                             color: Colors.white,
                             shape: RoundedRectangleBorder(
@@ -196,8 +219,8 @@ class _JobDetailState extends State<JobDetail> {
                     Expanded(
                       child: TabBarView(
                         children: [
-                          DescriptionTab(),
-                          CompanyTab(),
+                         Des(jobDe),
+                          Comp(jobDe),
                         ],
                       ),
                     )
@@ -222,7 +245,7 @@ class _JobDetailState extends State<JobDetail> {
                       ),
                       child: Icon(
                         Icons.favorite,
-                        color: Colors.black,
+                        color: Colors.blue,
                       ),
                     ),
                     SizedBox(width: 15.0),
@@ -282,7 +305,7 @@ class _JobDetailState extends State<JobDetail> {
                             );
                           },
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.black,
+                            primary: Colors.blue,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12.0),
                             ),
@@ -305,6 +328,80 @@ class _JobDetailState extends State<JobDetail> {
               ),
             ),
           );
+  }
+  Widget Des(JobDe){
+      return Container(
+      child: ListView(
+        children: <Widget>[
+          SizedBox(height: 25.0),
+          Text(
+            "Job Responsibilities",
+            style: TextStyle(
+              fontSize: 16.0,
+              color: Color(0xFF21202A),
+              fontWeight: FontWeight.w400,
+            ).copyWith(fontWeight: FontWeight.bold),
+          ),
+          SizedBox(height: 15.0),
+          Text(
+            JobDe.jobRes,
+            style: TextStyle(
+              fontSize: 14.0,
+              color: Color(0xFF21202A),
+            ).copyWith(
+              fontWeight: FontWeight.w300,
+              height: 1.5,
+              color: Color(0xFF5B5B5B),
+            ),
+          ),
+          SizedBox(height: 25.0),
+          Text(
+            "Benefits",
+            style: TextStyle(
+              fontSize: 16.0,
+              color: Color(0xFF21202A),
+              fontWeight: FontWeight.w400,
+            ).copyWith(fontWeight: FontWeight.bold),
+          ),
+          SizedBox(height: 15.0),
+          Text(
+            JobDe.benefits,
+            style: TextStyle(
+              fontSize: 14.0,
+              color: Color(0xFF21202A),
+            ).copyWith(
+              fontWeight: FontWeight.w300,
+              height: 1.5,
+              color: Color(0xFF5B5B5B),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+  Widget Comp(jobDe){
+    return Container(
+      child: ListView(
+        children: <Widget>[
+          SizedBox(height: 25.0),
+          // ignore: prefer_const_constructors
+          Text(
+            "About Company",
+            style: const TextStyle(
+                fontSize: 16.0,
+                color: Colors.black,
+                fontWeight: FontWeight.bold),
+          ),
+          SizedBox(height: 15.0),
+          Text(jobDe.companyDesc,
+              style: TextStyle(
+                fontWeight: FontWeight.w300,
+                height: 1.5,
+                color: Color(0xFF5B5B5B),
+              )),
+        ],
+      ),
+    );
   }
 }
  
