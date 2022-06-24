@@ -4,7 +4,7 @@ var blue = Color.fromRGBO(57, 172, 231, 100);
 
 class AccountPage extends StatefulWidget {
   const AccountPage({Key? key}) : super(key: key);
-
+static const String routeName = '/';
   @override
   State<AccountPage> createState() => _AccountPageState();
 }

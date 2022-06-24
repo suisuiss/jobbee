@@ -5,6 +5,7 @@ const authRouter = require("./routes/auth");
 const userRouter = require('./routes/favorite');
 const PORT = 3000;
 const app = express();
+
 app.use(express.json());
 app.use(authRouter);
 app.use(userRouter);
@@ -20,3 +21,4 @@ mongoose
 app.listen(PORT , () => {
     console.log('connected at port ' + PORT);
 });``
+

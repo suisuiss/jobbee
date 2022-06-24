@@ -10,7 +10,7 @@ import 'package:jobbee/model.dart/work.dart';
 
 class Applied extends StatefulWidget {
   const Applied({Key? key}) : super(key: key);
-
+static const String routeName = '/applied';
   @override
   State<Applied> createState() => _AppliedState();
 }

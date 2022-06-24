@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 class Job {
-  final String? id;
+  final String id;
   final String companyName;
   final String images;
   final String position;
@@ -14,7 +14,7 @@ class Job {
   final String location;
 
   Job(
-      {this.id,
+      {required this.id,
       required this.companyName,
       required this.images,
       required this.position,
@@ -25,8 +25,7 @@ class Job {
       required this.benefits,
       required this.companyDesc,
       required this.location});
-  Map<String, dynamic> toJson() {
-    return {
+  Map<String, dynamic> toJson()=> {
       'id': id,
       'companyName': companyName,
       'images': images,
@@ -39,20 +38,19 @@ class Job {
       'companyDesc': companyDesc,
       'location': location
     };
+  
+
+  factory Job.fromJson(Map<String, dynamic> json) => Job(
+        id: json['_id'],
+        companyName: json['companyName'] ,
+        images: json['images'] ,
+        position: json['position'] ,
+        salary: json['salary'] ,
+        fullOrPart: json['fullOrPart'] ,
+        online: json['online'] ,
+        jobRes: json['jobRes'] ,
+        benefits: json['benefits'] ,
+        companyDesc: json['companyDesc'],
+        location: json['location'] );
   }
 
-  factory Job.fromJson(Map<String, dynamic> json) {
-    return Job(
-        id: json['_id'],
-        companyName: json['companyName'] ?? '',
-        images: json['images'] ?? '',
-        position: json['position'] ?? '',
-        salary: json['salary'] ?? '',
-        fullOrPart: json['fullOrPart'] ?? '',
-        online: json['online'] ?? '',
-        jobRes: json['jobRes'] ?? '',
-        benefits: json['benefits'] ?? '',
-        companyDesc: json['companyDesc'] ?? '',
-        location: json['location'] ?? '');
-  }
-}

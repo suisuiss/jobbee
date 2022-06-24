@@ -1,99 +1,95 @@
 import 'package:flutter/material.dart';
-import '../modell/company.dart';
-import './CompanyTab.dart';
-import './DescriptionTab.dart';
-import 'package:jobbee/services/homeService.dart';
-
+import 'package:jobbee/applied.dart';
+import 'package:jobbee/provider/userProvider.dart';
 import 'package:jobbee/model.dart/work.dart';
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
 import 'package:jobbee/constant/constant.dart';
 import 'package:jobbee/constant/errorhandling.dart';
 import 'package:jobbee/constant/utils.dart';
-import 'package:jobbee/model.dart/work.dart';
 import 'package:http/http.dart' as http;
+import 'package:jobbee/services/appliedService.dart';
+import 'package:jobbee/services/favoriteService.dart';
+import 'package:provider/provider.dart';
 //import blue from instant
- 
+
 final blue = Color.fromRGBO(57, 172, 231, 100);
 
 class JobDetail extends StatefulWidget {
-  const JobDetail({Key? key}) : super(key: key);
-
+  const JobDetail({Key? key, required this.work}) : super(key: key);
+  final Work work;
+  static const String routeName = '/jobDetail';
   @override
   State<JobDetail> createState() => _JobDetailState();
 }
 
 class _JobDetailState extends State<JobDetail> {
+  final FavoriteService favoriteService = FavoriteService();
+  final AppliedService appliedService = AppliedService();
+
   @override
   Work? JobDetail;
   int number = 0;
   Future<Work> GetJobById(BuildContext context) async {
-    final JobId = ModalRoute.of(context)!.settings.arguments as String;
-    
+    final JobId = ModalRoute.of(context)!.settings.arguments as Work;
+
     Work? jobData;
-    try {
-      http.Response res = await http.get(Uri.parse('$url/api/job/' + JobId),
-          headers: {'Content-Type': 'application/json; charset=UTF-8'});
-      httpErrorHandle(
-          response: res,
-          context: context,
-          onSuccess: () {
-            // for (int i = 0; i < jsonDecode(res.body).length; i++) {
-            //   JobDett.add(Work.fromJson(jsonEncode(jsonDecode(res.body)[i])));
-            // }
+  //   try {
+  //     http.Response res = await http.get(Uri.parse('$url/api/job/' + JobId.toString()),
+  //         headers: {'Content-Type': 'application/json; charset=UTF-8'});
+  //     httpErrorHandle(
+  //         response: res,
+  //         context: context,
+  //         onSuccess: () {
+  //           // for (int i = 0; i < jsonDecode(res.body).length; i++) {
+  //           //   JobDett.add(Work.fromJson(jsonEncode(jsonDecode(res.body)[i])));
+  //           // }
 
-            jobData = Work.fromJson(jsonEncode(jsonDecode(res.body)));
-            setState(() {
-              JobDetail = jobData;
-            });
-            
-
-            
-          });
-    } catch (e) {
-      showSnackBar(context, e.toString());
-    }
-    return JobDetail!;
+  //           jobData = Work.fromJson(jsonEncode(jsonDecode(res.body)));
+  //           setState(() {
+  //             JobDetail = jobData;
+  //           });
+  //         });
+  //   } catch (e) {
+  //     showSnackBar(context, e.toString());
+  //   }
+    return JobId;
   }
 
   @override
   void initState() {
     super.initState();
-   
-  
+    
   }
- 
+
   @override
   void dispose() {
     super.dispose();
     //calling dependOninheritedWidget() to dispose the widget
-     
-
   }
 
- fetchAllWork() async {
+  void favorite() {
+    favoriteService.favorite(context: context, work: widget.work);
+  }
+
+  fetchAllWork() async {
     JobDetail = await GetJobById(context);
     setState(() {});
   }
 
   Widget build(BuildContext context) {
-    final jobId = ModalRoute.of(context)!.settings.arguments as String;
+    final userFav = context.watch<UserProvider>().user.favorite.length;
+    final jobId = ModalRoute.of(context)!.settings.arguments as Work;
     final jobDe = JobDetail;
     fetchAllWork();
-      setState(() {
-        
-        number = 123;
-         
-      });
-      
-       
-
+    setState(() {
+      number = 123;
+    });
 
     return jobDe == null
         ? Scaffold(
             body: Center(
               child: Text(
-                 jobDe.toString(),
+                jobDe.toString(),
               ),
             ),
           )
@@ -173,22 +169,18 @@ class _JobDetailState extends State<JobDetail> {
                           SizedBox(height: 15.0),
                           Center(
                             child: Container(
-                              decoration: BoxDecoration(
-                               // border circular
-                                borderRadius: BorderRadius.circular(15.0),
-                                color: Color.fromARGB(255, 223, 223, 223),
-                                
-                              ),
-                              height: 23,
-                              width:  100,
-                              
-                              child: Text(jobDe.fullOrPart,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 15
-                              ),
-                              )
-                            ),
+                                decoration: BoxDecoration(
+                                  // border circular
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  color: Color.fromARGB(255, 223, 223, 223),
+                                ),
+                                height: 23,
+                                width: 100,
+                                child: Text(
+                                  jobDe.fullOrPart,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(fontSize: 15),
+                                )),
                           ),
                           SizedBox(height: 15.0),
                           Material(
@@ -219,7 +211,7 @@ class _JobDetailState extends State<JobDetail> {
                     Expanded(
                       child: TabBarView(
                         children: [
-                         Des(jobDe),
+                          Des(jobDe),
                           Comp(jobDe),
                         ],
                       ),
@@ -243,10 +235,10 @@ class _JobDetailState extends State<JobDetail> {
                         border: Border.all(color: Colors.black.withOpacity(.5)),
                         borderRadius: BorderRadius.circular(12.0),
                       ),
-                      child: Icon(
-                        Icons.favorite,
-                        color: Colors.blue,
-                      ),
+                      child: IconButton(
+                          icon: Icon(Icons.favorite),
+                          color: Colors.blue,
+                          onPressed: favorite),
                     ),
                     SizedBox(width: 15.0),
                     Expanded(
@@ -329,8 +321,9 @@ class _JobDetailState extends State<JobDetail> {
             ),
           );
   }
-  Widget Des(JobDe){
-      return Container(
+
+  Widget Des(JobDe) {
+    return Container(
       child: ListView(
         children: <Widget>[
           SizedBox(height: 25.0),
@@ -379,7 +372,8 @@ class _JobDetailState extends State<JobDetail> {
       ),
     );
   }
-  Widget Comp(jobDe){
+
+  Widget Comp(jobDe) {
     return Container(
       child: ListView(
         children: <Widget>[

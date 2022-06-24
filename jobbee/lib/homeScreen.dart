@@ -8,11 +8,12 @@ import 'package:jobbee/buttom.dart';
 import 'package:jobbee/provider/loader.dart';
 import 'package:jobbee/provider/userProvider.dart';
 import 'package:jobbee/services/homeService.dart';
+import 'package:jobbee/view/jobDetail.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
-
+  static const String routeName = '/home';
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -79,7 +80,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 children: [
                                   TextSpan(
-                                    text: 'Hello '+ user.firstName+' '+ user.lastName,
+                                    text: 'Hello ' +
+                                        user.firstName +
+                                        ' ' +
+                                        user.lastName,
                                   ),
                                   TextSpan(
                                     text: '\nFind your dream job!',
@@ -101,95 +105,85 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           );
   }
-  
-  
+
   Widget banner() {
     final TextStyle white = TextStyle(color: Colors.white, fontSize: 15);
-    final jobData = jobs!;
+    final jobData = jobs![0];
     return jobs == null
         ? const Loader()
-        : 
-        
-
-
-        Container(
+        : Container(
             height: 200,
-            child: PageView(
-              children: [
-                for (int i=0; i<3; i++)
-                Container(             
-                  margin: EdgeInsets.all(15),
-                  decoration: BoxDecoration(
-                    //border radius 20
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(25),
-                    ),
-                    color: Color.fromARGB(255, 10, 57, 96),
+            child: PageView.builder(itemBuilder: (context, index) {
+              final jobb = jobs![index];
+
+              return Container(
+                margin: EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  //border radius 20
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(25),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Column(
-                      //cross align
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                  color: Color.fromARGB(255, 10, 57, 96),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Column(
+                    //cross align
+                    crossAxisAlignment: CrossAxisAlignment.start,
 
-                      children: [
-                        //1st
+                    children: [
+                      //1st
 
-                        GestureDetector(
-                          onTap: () => {
-                            print (jobData[i].id),
-                            //print type of jobData
-                            // print(jobData.runtimeType),
-                            // print(jobs.runtimeType),
-                            // print(jobData.id.runtimeType),
-                            //navigate push name to jobdetail page
-                            Navigator.pushNamed(context, '/jobDetail',
-                            arguments: jobData[i].id
-                            ),
+                      GestureDetector(
+                        onTap: () => {
+                          print('clicked on ' + jobData.companyName),
+                          //print type of jobData
+                          print(jobData.runtimeType),
+                          print(jobs.runtimeType),
+                          //navigate push name to jobdetail page
+                          Navigator.pushNamed(context, JobDetail.routeName,
+                              arguments: jobb),
+                        },
+                        child: Row(
+                          //space between
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Image.network(jobData.images,
+                                height: 75, width: 75),
+                            Container(
+                                margin: EdgeInsets.only(right: 20, top: 20),
+                                child: Text(
+                                  jobData.salary,
+                                  style: white,
+                                ))
+                          ],
+                        ),
+                      ),
+                      Text(
+                        jobData.position,
+                        style: white,
+                      ),
 
-                          },
-                          child: Row(
-                            //space between
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Image.network(jobData[i].images,
-                                  height: 75, width: 75),
-                              Container(
-                                  margin: EdgeInsets.only(right: 20, top: 20),
-                                  child: Text(
-                                    jobData[i].salary,
-                                    style: white,
-                                  ))
-                            ],
+                      Text(
+                        jobData.location,
+                        style: white,
+                      ),
+                      Container(
+                          //margin all
+                          height: 19,
+                          margin: EdgeInsets.all(5),
+                          padding: EdgeInsets.only(left: 5, right: 5),
+                          decoration: BoxDecoration(
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
                           ),
-                        ),
-                        Text(
-                          jobData[i].position,
-                          style: white,
-                        ),
-
-                        Text(
-                          jobData[i].location,
-                          style: white,
-                        ),
-                        Container(
-                            //margin all
-                            height: 19,
-                            margin: EdgeInsets.all(5),
-                            padding: EdgeInsets.only(left: 5, right: 5),
-                            decoration: BoxDecoration(
-                              color: Colors.grey,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                            ),
-                            child: Text(jobData[i].fullOrPart))
-                      ],
-                    ),
+                          child: Text(jobData.fullOrPart))
+                    ],
                   ),
-                )
-              ],
-            ),
+                ),
+              );
+            }),
           );
   }
 

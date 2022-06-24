@@ -8,14 +8,19 @@ import 'package:jobbee/model.dart/job.dart';
 import 'package:jobbee/model.dart/work.dart';
 import 'package:jobbee/nav.dart';
 import 'package:jobbee/searchWidget.dart';
+import 'package:jobbee/services/homeService.dart';
 import 'package:jobbee/services/searchService.dart';
+import 'package:jobbee/view/jobDetail.dart';
 
 class SearchResult extends StatefulWidget {
+  static const String routeName = '/search';
   @override
   State<SearchResult> createState() => _SearchResultState();
 }
 
 class _SearchResultState extends State<SearchResult> {
+  List<Work>?works;
+  final HomeService homeService = HomeService();
   List<Job> jobs = [];
   String query = '';
   Timer? deboucer;
@@ -24,6 +29,14 @@ class _SearchResultState extends State<SearchResult> {
   void initState() {
     super.initState();
     init();
+    fetchAllWork();
+  }
+
+   
+
+  fetchAllWork() async {
+    works = await homeService.fetchAllWorks(context);
+    setState(() {});
   }
 
   @override
@@ -46,28 +59,44 @@ class _SearchResultState extends State<SearchResult> {
     final jobs = await SearchService.getJobs(query);
     setState(() => this.jobs = jobs);
   }
-  @override
-  Widget build(BuildContext context){
-      final isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom == 0;
-    return Scaffold(
-    body: Column(
-          children: <Widget>[
-            buildSearch(),
-            Expanded(
-              child: ListView.builder(
-                itemCount: jobs.length,
-                itemBuilder: (context, index) {
-                  final job = jobs[index];
 
-                  return buildJob(job);
-                },
-              ),
-            ),
-         isKeyboardOpen?    Buttom():Container()
-          ],
+  @override
+  Widget build(BuildContext context) {
+    final isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom == 0;
+    return Scaffold(
+      body: Column(
+        children: <Widget>[
+          buildSearch(),
+          Expanded(
+            child: ListView.builder(
+              itemCount: jobs.length,
+              itemBuilder: (context, index) {
+                final job = jobs[index];
+                final work = works![index];
+                return GestureDetector(
+        onTap: () => {
+          Navigator.pushNamed(context, '/jobDetail', arguments: work),
+        },
+        child: ListTile(
+          leading: Image.network(
+            job.images,
+            fit: BoxFit.cover,
+            width: 50,
+            height: 50,
+          ),
+          title: Text(job.position),
+          subtitle: Text(job.companyName + ' ' + job.location),
         ),
       );
+              },
+            ),
+          ),
+          isKeyboardOpen ? Buttom() : Container()
+        ],
+      ),
+    );
   }
+
   Widget buildSearch() => SearchWidget(
         text: query,
         hintText: 'Search For Job Position',
@@ -85,25 +114,7 @@ class _SearchResultState extends State<SearchResult> {
         });
       });
 
-  Widget buildJob(Job job) => 
   
-  GestureDetector(
-    onTap: () => {
-          Navigator.pushNamed(context, '/jobDetail',
-                            arguments: job.id
-                            ),    
-    },
-    child: ListTile(
-          leading: Image.network(
-            job.images,
-            fit: BoxFit.cover,
-            width: 50,
-            height: 50,
-          ),
-          title: Text(job.position),
-          subtitle: Text(job.companyName+' '+job.location),
-        ),
-  );
 }
 
   // @override
