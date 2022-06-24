@@ -46,7 +46,9 @@ class UserService {
           workEx: workEx,
           skill: skill,
           email: email,
-          password: password);
+          password: password,
+          favorite: [],
+          applied: [],token: '');
       http.Response res = await http.post(Uri.parse('$url/api/signup'),
           body: user.toJson(),
           headers: <String, String>{
@@ -60,7 +62,7 @@ class UserService {
             Navigator.pushReplacementNamed(context, '/login');
           });
     } catch (e) {
-      showSnackBar(context, e.toString());
+      //showSnackBar(context, e.toString());
     }
   }
 
@@ -83,14 +85,14 @@ class UserService {
           context: context,
           onSuccess: () async {
             SharedPreferences prefs = await SharedPreferences.getInstance();
-            Provider.of<UserProvider>(context,listen: false).setUser(res.body);
+            Provider.of<UserProvider>(context, listen: false).setUser(res.body);
             await prefs.setString(
                 'x-auth-token', jsonDecode(res.body)['token']);
             // Navigator.push(context, MaterialPageRoute(builder: (context)=>const HomeScreen()));
             Navigator.pushReplacementNamed(context, '/home');
           });
     } catch (e) {
-      showSnackBar(context, e.toString());
+      //showSnackBar(context, e.toString());
     }
   }
 
@@ -110,16 +112,17 @@ class UserService {
           });
       var response = jsonDecode(tokenRes.body);
       if (response == true) {
-        http.Response userRes = await http.get(Uri.parse('$url/'), headers: <String,String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-          'x-auth-token': token
-        });
+        http.Response userRes = await http.get(Uri.parse('$url/'),
+            headers: <String, String>{
+              'Content-Type': 'application/json; charset=UTF-8',
+              'x-auth-token': token
+            });
 
         var userProvider = Provider.of<UserProvider>(context, listen: false);
         userProvider.setUser(userRes.body);
       }
     } catch (e) {
-      showSnackBar(context, e.toString());
+     // showSnackBar(context, e.toString());
     }
   }
 }

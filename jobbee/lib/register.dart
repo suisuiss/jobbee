@@ -11,7 +11,7 @@ import 'package:dotted_border/dotted_border.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
-
+static const String routeName = '/signup';
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
 }

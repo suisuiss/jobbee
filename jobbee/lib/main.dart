@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:jobbee/model.dart/work.dart';
 import 'package:jobbee/provider/userProvider.dart';
+import 'package:jobbee/router.dart';
 import 'package:jobbee/view/jobDetail.dart';
 import 'package:provider/provider.dart';
 import '../view/ProfilePage.dart';
@@ -23,6 +25,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
+  
 
   // This widget is the root of your application.
   @override
@@ -31,18 +34,19 @@ class MyApp extends StatelessWidget {
       //remove dubug banner
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
-      routes: {
-        '/': (context) => AccountPage(),
-        '/login': (context) => LoginScreen(),
-        '/signup': (context) => RegisterScreen(),
-        '/home': (context) => HomeScreen(),
-        '/testhome': (context) => HomeContent(),
-        '/applied': (context) => Applied(),
-        '/search': (context) => SearchResult(),
-        '/test': (context) => HomeContent(),
-        '/profile': (context) => ProfilePage(),
-        '/jobDetail': (context) => JobDetail(),
-      },
+onGenerateRoute: (routeSettings)=>generateRoute(routeSettings),
+home: AccountPage(),
+      // routes: {
+      //   '/': (context) => AccountPage(),
+      //   '/login': (context) => LoginScreen(),
+      //   '/signup': (context) => RegisterScreen(),
+      //   '/home': (context) => HomeScreen(),
+      //   '/testhome': (context) => HomeContent(),
+      //   '/applied': (context) => Applied(),
+      //   '/search': (context) => SearchResult(),
+      //   '/test': (context) => HomeContent(),
+      //   '/profile': (context) => ProfilePage(),
+      // },
     );
   }
 }

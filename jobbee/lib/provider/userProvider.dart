@@ -15,7 +15,10 @@ class UserProvider extends ChangeNotifier {
       workEx: '',
       skill: '',
       email: '',
-      password: '');
+      password: '',
+      favorite: [],
+      applied: [],
+      token: '');
 
   User get user => _user;
   void setUser(String user) {
@@ -28,3 +31,6 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 }
+
+
+

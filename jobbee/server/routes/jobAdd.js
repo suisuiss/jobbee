@@ -53,14 +53,15 @@ jobRouter.get("/api/home-job", async (req, res) => {
     }
 })
  
-jobRouter.get('/api/job/:id', async (req, res) => {
-    try{
-        const job = await Job.findById(req.params.id);
-        res.json(job);   
-    } catch (e) {
-        res.status(500).json({ error: e.message });
-    }
-}
-);
+// jobRouter.get('/api/job/:id', async (req, res) => {
+//     try{
+//         const job = await Job.findById(req.params.id);
+//         res.json(job);   
+//     } catch (e) {
+//        res.status(500).json({ error: e.message });
+//     console.log(e.message);
+//     }
+// }
+// );
 
 module.exports = jobRouter;
