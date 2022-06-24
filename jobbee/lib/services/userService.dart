@@ -48,7 +48,7 @@ class UserService {
           email: email,
           password: password,
           favorite: [],
-          applied: []);
+          applied: [],token: '');
       http.Response res = await http.post(Uri.parse('$url/api/signup'),
           body: user.toJson(),
           headers: <String, String>{

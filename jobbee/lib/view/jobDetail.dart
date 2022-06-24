@@ -70,6 +70,9 @@ class _JobDetailState extends State<JobDetail> {
   void favorite() {
     favoriteService.favorite(context: context, work: widget.work);
   }
+   void applied() {
+    appliedService.applied(context: context, work: widget.work);
+  }
 
   fetchAllWork() async {
     JobDetail = await GetJobById(context);
@@ -265,6 +268,7 @@ class _JobDetailState extends State<JobDetail> {
                                     child: Text("Apply"),
                                     onPressed: () {
                                       Navigator.pop(context);
+                                      applied();
 
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(

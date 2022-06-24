@@ -16,6 +16,7 @@ class FavoriteService {
       http.Response res = await http.post(Uri.parse('$url/api/job/favorite'),
           headers: {
             'Content-Type': 'application/json;charset=UTF-8',
+            'x-auth-token':userProvider.user.token
           },
           body: jsonEncode({'id': work.id!}));
       httpErrorHandle(
@@ -23,8 +24,9 @@ class FavoriteService {
           context: context,
           onSuccess: () {
             User user = userProvider.user
-                .copyWith(favorite: jsonDecode(res.body)['applied']);
+                .copyWith(favorite: jsonDecode(res.body)['favorite']);
             userProvider.setUserFromModel(user);
+            showSnackBar(context, 'Added to Favorite!');
           });
     } catch (e) {
       showSnackBar(context, e.toString());

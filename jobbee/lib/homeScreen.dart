@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jobbee/favWidget.dart';
 import 'package:jobbee/model.dart/work.dart';
 //import navbar
 import 'package:jobbee/nav.dart';
@@ -7,6 +8,7 @@ import 'package:jobbee/buttom.dart';
 //import work model
 import 'package:jobbee/provider/loader.dart';
 import 'package:jobbee/provider/userProvider.dart';
+import 'package:jobbee/services/favoriteService.dart';
 import 'package:jobbee/services/homeService.dart';
 import 'package:jobbee/view/jobDetail.dart';
 import 'package:provider/provider.dart';
@@ -21,6 +23,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List<Work>? jobs;
   final HomeService homeService = HomeService();
+  final FavoriteService favoriteService = FavoriteService();
   final InputDecoration textFormstyle = InputDecoration(
     border:
         OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -96,7 +99,21 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       // searchBox(),
                       banner(),
-                      fav(workData),
+                      Text('Your favourite jobs',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          )),
+                      ListView.builder(
+                        itemCount: user.favorite.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return Favwidget(
+                            index: index,
+                          );
+                        },
+                      )
                     ])),
                   ),
                   isKeyboardOpen ? Buttom() : Container(),
@@ -113,7 +130,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ? const Loader()
         : Container(
             height: 200,
-            child: PageView.builder(itemBuilder: (context, index) {
+            child: PageView.builder(
+            itemCount: jobs!.length,
+              itemBuilder: (context, index) {
               final jobb = jobs![index];
 
               return Container(
@@ -136,7 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                       GestureDetector(
                         onTap: () => {
-                          print('clicked on ' + jobData.companyName),
+                          print('clicked on ' + jobb.companyName),
                           //print type of jobData
                           print(jobData.runtimeType),
                           print(jobs.runtimeType),
@@ -149,7 +168,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Image.network(jobData.images,
+                            Image.network(jobb.images,
                                 height: 75, width: 75),
                             Container(
                                 margin: EdgeInsets.only(right: 20, top: 20),
@@ -161,12 +180,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       Text(
-                        jobData.position,
+                        jobb.position,
                         style: white,
                       ),
 
                       Text(
-                        jobData.location,
+                        jobb.location,
                         style: white,
                       ),
                       Container(
@@ -178,7 +197,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: Colors.grey,
                             borderRadius: BorderRadius.all(Radius.circular(20)),
                           ),
-                          child: Text(jobData.fullOrPart))
+                          child: Text(jobb.fullOrPart))
                     ],
                   ),
                 ),

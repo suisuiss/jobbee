@@ -85,9 +85,7 @@ const userSchema = mongoose.Schema({
     }],
     applied: [{
         job: jobSchema,
-        quantity: {
-            type: Number
-        }
+        
     }]
 
 });

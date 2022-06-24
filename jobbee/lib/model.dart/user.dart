@@ -16,6 +16,7 @@ class User {
   final String password;
   final List<dynamic> favorite;
   final List<dynamic> applied;
+  final String token;
 
   User(
       {required this.id,
@@ -32,7 +33,8 @@ class User {
       required this.email,
       required this.password,
       required this.favorite,
-      required this.applied});
+      required this.applied,
+      required this.token});
 
   Map<String, dynamic> toMap() {
     return {
@@ -50,7 +52,8 @@ class User {
       'email': email,
       'password': password,
       'favorite': favorite,
-      'applied': applied
+      'applied': applied,
+      'token': token
     };
   }
 
@@ -72,45 +75,45 @@ class User {
         favorite: List<Map<String, dynamic>>.from(
             map['favorite']?.map((x) => Map<String, dynamic>.from(x))),
         applied: List<Map<String, dynamic>>.from(
-            map['applied']?.map((x) => Map<String, dynamic>.from(x))));
+            map['applied']?.map((x) => Map<String, dynamic>.from(x))),
+        token: map['token'] ?? '');
   }
   String toJson() => json.encode(toMap());
 
   factory User.fromJson(String source) => User.fromMap(json.decode(source));
-User copyWith({
-  String?id,
-  List<String>?images,
-  String?firstName,
-  String?lastName,
-  String?phoneNo,
-  String?basedOn,
-  String?disType,
-  String?edLevel,
-  String?eddetail,
-  String?workEx,
-String?skill,
-String?email,
-String?password,
-List<dynamic>?favorite,
-List<dynamic>?applied
-})
-  {
+  User copyWith(
+      {String? id,
+      List<String>? images,
+      String? firstName,
+      String? lastName,
+      String? phoneNo,
+      String? basedOn,
+      String? disType,
+      String? edLevel,
+      String? eddetail,
+      String? workEx,
+      String? skill,
+      String? email,
+      String? password,
+      List<dynamic>? favorite,
+      List<dynamic>? applied,
+      String? token}) {
     return User(
-      id: id??this.id,
-      images: images??this.images,
-      firstName:firstName?? this.firstName, 
-      lastName:lastName??this.lastName, 
-      phoneNo:phoneNo??this.phoneNo,
-    basedOn: basedOn ?? this.basedOn,
+        id: id ?? this.id,
+        images: images ?? this.images,
+        firstName: firstName ?? this.firstName,
+        lastName: lastName ?? this.lastName,
+        phoneNo: phoneNo ?? this.phoneNo,
+        basedOn: basedOn ?? this.basedOn,
         disType: disType ?? this.disType,
         edLevel: edLevel ?? this.edLevel,
         eddetail: eddetail ?? this.eddetail,
-        workEx: workEx??this.workEx,
-        skill: skill??this.skill,
-        email: email??this.email,
-        password: password??this.password,
-        favorite: favorite??this.favorite,
-        applied: applied??this.applied
-    );
+        workEx: workEx ?? this.workEx,
+        skill: skill ?? this.skill,
+        email: email ?? this.email,
+        password: password ?? this.password,
+        favorite: favorite ?? this.favorite,
+        applied: applied ?? this.applied,
+        token: token??this.token);
   }
 }

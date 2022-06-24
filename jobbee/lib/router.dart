@@ -34,7 +34,6 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       );
 
     case Applied.routeName:
-      var category = routeSettings.arguments as String;
       return MaterialPageRoute(
           settings: routeSettings, builder: (_) => const Applied());
 
@@ -52,7 +51,7 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       );
     case ProfilePage.routeName:
       return MaterialPageRoute(
-          settings: routeSettings, builder: (_) => const ProfilePage());
+          settings: routeSettings, builder: (_) => ProfilePage());
 
     default:
       return MaterialPageRoute(
