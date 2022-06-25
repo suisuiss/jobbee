@@ -227,9 +227,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     decoration: textFormstyle.copyWith(hintText: 'First Name'),
                     //null validatoor
                     validator: (value) {
-                      if (value == null) {
+                      if (value == null || value.isEmpty) {
                         return 'Please enter your first name';
-                      }
+                      } 
                       return null;
                     },
                   ),
@@ -240,7 +240,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     controller: lastnameController,
                     decoration: textFormstyle.copyWith(hintText: 'Last Name'),
                     validator: (value) {
-                      if (value == null) {
+                      if (value == null || value.isEmpty) {
                         return 'Please enter your last name';
                       }
                       return null;
@@ -254,7 +254,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       decoration:
                           textFormstyle.copyWith(hintText: 'Phone Number'),
                       validator: (value) {
-                        if (value == null) {
+                        if (value==null || value.isEmpty ) {
                           return 'Please enter your phone number';
                         }
                         return null;
@@ -267,7 +267,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       decoration: textFormstyle.copyWith(
                           hintText: 'Based on(city,country)'),
                       validator: (value) {
-                        if (value == null) {
+                        if (value == null || value.isEmpty) {
                           return 'Please enter your location';
                         }
                         return null;
@@ -302,7 +302,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       decoration:
                           textFormstyle.copyWith(hintText: 'Education level'),
                       validator: (value) {
-                        if (value == null) {
+                        if (value == null || value.isEmpty) {
                           return 'Please enter your education level';
                         }
                         return null;
@@ -314,8 +314,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       controller: educationDetailController,
                       decoration:
                           textFormstyle.copyWith(hintText: 'Education field'),
-                      validator: (value) {
-                        if (value == null) {
+                      validator: (value ) {
+                        if (value == null || value.isEmpty) {
                           return 'Please enter your education field';
                         }
                         return null;
@@ -328,7 +328,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       decoration:
                           textFormstyle.copyWith(hintText: 'Work experience'),
                       validator: (value) {
-                        if (value == null) {
+                        if (value == null || value.isEmpty) {
                           return 'Please enter your work experience';
                         }
                         return null;
@@ -340,7 +340,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       controller: skillController,
                       decoration: textFormstyle.copyWith(hintText: 'Skill'),
                       validator: (value) {
-                        if (value == null) {
+                        if (value == null || value.isEmpty) {
                           return 'Please enter your skill';
                         }
                         return null;
@@ -351,10 +351,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   child: TextFormField(
                       controller: emailController,
                       decoration: textFormstyle.copyWith(hintText: 'Email'),
-                      validator: (value) {
+                      validator: (value ) {
                         var emailRegex = RegExp(
                             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-                        if (value == null) {
+                        if (value == null || value.isEmpty) {
                           return 'Please enter your email';
                         }
                         if (!emailRegex.hasMatch(value)) {
@@ -373,7 +373,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       obscureText: true,
                       decoration: textFormstyle.copyWith(hintText: 'Password'),
                       validator: (value) {
-                        if (value == null) {
+                        if (value == null || value.isEmpty) {
                           return 'Please enter your password';
                         }
                         if (value.length < 8) {
@@ -390,7 +390,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       decoration:
                           textFormstyle.copyWith(hintText: 'Confirm Password'),
                       validator: (value) {
-                        if (value == null) {
+                        if (value == null || value.isEmpty) {
                           return 'Please comfirm your password';
                         } else if (confirmpasswordController.text !=
                             passwordController.text) {
@@ -406,7 +406,32 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   width: deviceWidth * 0.5,
                   child: RaisedButton(
                     onPressed: () {
-                      if (_formKey.currentState!.validate()) {
+                      if(images.isEmpty){
+                        ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                              //duration 2
+                                              //green snackbar
+
+                                              SnackBar(
+                                        shape: RoundedRectangleBorder(
+                                          
+                                        ),
+                                        //floating behaviour
+                                        behavior: SnackBarBehavior.floating,
+                                        backgroundColor: Colors.green,
+                                        duration: Duration(seconds: 2),
+                                        content: Text(
+                                          'please insert your image',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: 20,
+
+                                            //textalign center
+                                          ),
+                                        ),
+                                      ));
+                        
+                      }else if (_formKey.currentState!.validate()) {
                         signUpUser();
                       }
                     },
@@ -424,5 +449,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
       ),
     );
+    Widget toLogin(){
+      return      Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('Already a user?'),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/login');
+                          },
+                          style: TextButton.styleFrom(
+                            minimumSize: Size.zero, // Set this
+                            padding: EdgeInsets.zero, // and this
+                          ),
+                          child: Text(
+                            '  Log in',
+                            style: TextStyle(color: blue),
+                          ),
+                        )
+                      ],
+                    );
+    }
   }
 }

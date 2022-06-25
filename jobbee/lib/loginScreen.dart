@@ -145,4 +145,24 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
- 
+ Widget toLogin(context){
+  return  Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Don\'t have an account?'),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/register');
+                              },
+                              style: TextButton.styleFrom(
+                                minimumSize: Size.zero, // Set this
+                                padding: EdgeInsets.zero, // and this
+                              ),
+                              child: Text(
+                                '  Sign up',
+                                style: TextStyle(color: blue),
+                              ),
+                            )
+                          ],
+                        );
+ }

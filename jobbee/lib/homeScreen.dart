@@ -99,6 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       // searchBox(),
                       banner(),
+
                       Text('Your favourite jobs',
                           textAlign: TextAlign.left,
                           style: TextStyle(
@@ -114,6 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           );
                         },
                       )
+
                     ])),
                   ),
                   isKeyboardOpen ? Buttom() : Container(),
@@ -219,6 +221,18 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
+    );
+  }
+  Widget picBanner(deviceWidth ){
+    //get width screen
+    
+    return Container(
+      width: deviceWidth,
+      
+      child : Image(
+        height: 200,
+        image: AssetImage('assets/banner.png'),
+      )
     );
   }
 

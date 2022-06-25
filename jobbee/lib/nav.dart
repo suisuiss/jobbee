@@ -56,7 +56,17 @@ class _NavbarState extends State<Navbar> {
                           ),
                         ),
                       ),
-                      GestureDetector(
+                      user.images[0]==null? 
+                      IconButton(
+                        onPressed:(){
+                          Navigator.pushNamed(context, '/profile');
+                        } ,
+                        icon:   Icon(Icons.account_circle,
+                         
+                        
+                      ),)
+                      
+                      :GestureDetector(
                         child: ProfileWidget(
                           imagePath: user.images[0],
                           onClicked: () {
