@@ -63,7 +63,7 @@ class UserService {
             Navigator.pushReplacementNamed(context, '/login');
           });
     } catch (e) {
-      //showSnackBar(context, e.toString());
+      showSnackBar(context, e.toString());
     }
   }
 
@@ -93,7 +93,7 @@ class UserService {
             Navigator.pushReplacementNamed(context, '/home');
           });
     } catch (e) {
-      //showSnackBar(context, e.toString());
+      showSnackBar(context, e.toString());
     }
   }
 
@@ -123,7 +123,7 @@ class UserService {
         userProvider.setUser(userRes.body);
       }
     } catch (e) {
-     // showSnackBar(context, e.toString());
+     showSnackBar(context, e.toString());
     }
   }
 
