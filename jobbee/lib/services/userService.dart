@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:flutter/material.dart';
+import 'package:jobbee/account.dart';
 import 'package:jobbee/provider/userProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -125,4 +126,22 @@ class UserService {
      // showSnackBar(context, e.toString());
     }
   }
+
+
+void logOut(BuildContext context) async {
+    try {
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      await sharedPreferences.setString('x-auth-token', '');
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        AccountPage.routeName,
+        (route) => false,
+      );
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
 }
+
+
