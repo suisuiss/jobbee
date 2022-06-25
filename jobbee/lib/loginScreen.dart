@@ -9,7 +9,7 @@ final blue = Color.fromRGBO(57, 172, 231, 100);
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
-
+static const String routeName = '/login';
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }

@@ -21,7 +21,7 @@ class HomeService {
             }
           });
     } catch (e) {
-      showSnackBar(context, e.toString());
+      //showSnackBar(context, e.toString());
     }
     return workList;
   }

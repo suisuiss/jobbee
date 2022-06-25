@@ -14,6 +14,9 @@ class User {
   final String skill;
   final String email;
   final String password;
+  final List<dynamic> favorite;
+  final List<dynamic> applied;
+  final String token;
 
   User(
       {required this.id,
@@ -28,12 +31,15 @@ class User {
       required this.workEx,
       required this.skill,
       required this.email,
-      required this.password});
+      required this.password,
+      required this.favorite,
+      required this.applied,
+      required this.token});
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'images':images,
+      'images': images,
       'firstName': firstName,
       'lastName': lastName,
       'phoneNo': phoneNo,
@@ -44,28 +50,70 @@ class User {
       'workEx': workEx,
       'skill': skill,
       'email': email,
-      'password': password
+      'password': password,
+      'favorite': favorite,
+      'applied': applied,
+      'token': token
     };
   }
 
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
-      id: map['_id'] ?? '',
-      images: List<String>.from(map['images']),
-      firstName: map['firstName'] ?? '',
-      lastName: map['lastName'] ?? '',
-      phoneNo: map['phoneNo'] ?? '',
-      basedOn: map['basedOn'] ?? '',
-      disType: map['disType'] ?? '',
-      edLevel: map['edLevel'] ?? '',
-      eddetail: map['eddetail'] ?? '',
-      workEx: map['workEx'] ?? '',
-      skill: map['skill'] ?? '',
-      email: map['email'] ?? '',
-      password: map['password'] ?? '',
-    );
+        id: map['_id'] ?? '',
+        images: List<String>.from(map['images']),
+        firstName: map['firstName'] ?? '',
+        lastName: map['lastName'] ?? '',
+        phoneNo: map['phoneNo'] ?? '',
+        basedOn: map['basedOn'] ?? '',
+        disType: map['disType'] ?? '',
+        edLevel: map['edLevel'] ?? '',
+        eddetail: map['eddetail'] ?? '',
+        workEx: map['workEx'] ?? '',
+        skill: map['skill'] ?? '',
+        email: map['email'] ?? '',
+        password: map['password'] ?? '',
+        favorite: List<Map<String, dynamic>>.from(
+            map['favorite']?.map((x) => Map<String, dynamic>.from(x))),
+        applied: List<Map<String, dynamic>>.from(
+            map['applied']?.map((x) => Map<String, dynamic>.from(x))),
+        token: map['token'] ?? '');
   }
   String toJson() => json.encode(toMap());
 
   factory User.fromJson(String source) => User.fromMap(json.decode(source));
+  User copyWith(
+      {String? id,
+      List<String>? images,
+      String? firstName,
+      String? lastName,
+      String? phoneNo,
+      String? basedOn,
+      String? disType,
+      String? edLevel,
+      String? eddetail,
+      String? workEx,
+      String? skill,
+      String? email,
+      String? password,
+      List<dynamic>? favorite,
+      List<dynamic>? applied,
+      String? token}) {
+    return User(
+        id: id ?? this.id,
+        images: images ?? this.images,
+        firstName: firstName ?? this.firstName,
+        lastName: lastName ?? this.lastName,
+        phoneNo: phoneNo ?? this.phoneNo,
+        basedOn: basedOn ?? this.basedOn,
+        disType: disType ?? this.disType,
+        edLevel: edLevel ?? this.edLevel,
+        eddetail: eddetail ?? this.eddetail,
+        workEx: workEx ?? this.workEx,
+        skill: skill ?? this.skill,
+        email: email ?? this.email,
+        password: password ?? this.password,
+        favorite: favorite ?? this.favorite,
+        applied: applied ?? this.applied,
+        token: token??this.token);
+  }
 }
