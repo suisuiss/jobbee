@@ -92,6 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       // searchBox(),
                       banner(),
+                      picBanner(deviceWidth),
                       fav(workData),
                     ])),
                   ),
@@ -206,6 +207,18 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
+    );
+  }
+  Widget picBanner(deviceWidth ){
+    //get width screen
+    
+    return Container(
+      width: deviceWidth,
+      
+      child : Image(
+        height: 200,
+        image: AssetImage('assets/banner.png'),
+      )
     );
   }
 
