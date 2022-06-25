@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jobbee/model.dart/user.dart';
 import 'package:jobbee/provider/userProvider.dart';
+import 'package:jobbee/services/userService.dart';
 import 'package:provider/provider.dart';
 
 final blue = Color.fromRGBO(57, 172, 231, 100);
@@ -8,6 +9,7 @@ final blue = Color.fromRGBO(57, 172, 231, 100);
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
   static const String routeName = '/profile';
+
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserProvider>(context).user;
@@ -126,8 +128,7 @@ Widget button(deviceWidth, context) {
     width: deviceWidth * 0.5,
     child: RaisedButton(
       onPressed: () {
-        Navigator.of(context)
-            .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
+        UserService().logOut(context);
       },
       color: blue,
       textColor: Colors.white,
