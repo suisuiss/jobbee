@@ -99,23 +99,39 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       // searchBox(),
                       banner(),
+                      picBanner(deviceWidth),
+                      Padding(
+                        //padding only left
+                        padding: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * 0.07,
+                        ),
 
-                      Text('Your favourite jobs',
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          )),
-                      ListView.builder(
-                        itemCount: user.favorite.length,
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          return Favwidget(
-                            index: index,
-                          );
-                        },
+                        child: Align(
+                          //padding left
+
+                          alignment: Alignment.centerLeft,
+                          child: Text('Your favourite jobs',
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold,
+                                //Text align left
+                              )),
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      MediaQuery.removePadding(
+                        removeTop: true,
+                         context:context,
+                        child: ListView.builder(
+                          itemCount: user.favorite.length,
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            return Favwidget(
+                              index: index,
+                            );
+                          },
+                        ),
                       )
-
                     ])),
                   ),
                   isKeyboardOpen ? Buttom() : Container(),
@@ -133,78 +149,79 @@ class _HomeScreenState extends State<HomeScreen> {
         : Container(
             height: 200,
             child: PageView.builder(
-            itemCount: jobs!.length,
-              itemBuilder: (context, index) {
-              final jobb = jobs![index];
+                itemCount: jobs!.length,
+                itemBuilder: (context, index) {
+                  final jobb = jobs![index];
 
-              return Container(
-                margin: EdgeInsets.all(15),
-                decoration: BoxDecoration(
-                  //border radius 20
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(25),
-                  ),
-                  color: Color.fromARGB(255, 10, 57, 96),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Column(
-                    //cross align
-                    crossAxisAlignment: CrossAxisAlignment.start,
-
-                    children: [
-                      //1st
-
-                      GestureDetector(
-                        onTap: () => {
-                          print('clicked on ' + jobb.companyName),
-                          //print type of jobData
-                          print(jobData.runtimeType),
-                          print(jobs.runtimeType),
-                          //navigate push name to jobdetail page
-                          Navigator.pushNamed(context, JobDetail.routeName,
-                              arguments: jobb),
-                        },
-                        child: Row(
-                          //space between
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Image.network(jobb.images,
-                                height: 75, width: 75),
-                            Container(
-                                margin: EdgeInsets.only(right: 20, top: 20),
-                                child: Text(
-                                  jobData.salary,
-                                  style: white,
-                                ))
-                          ],
-                        ),
+                  return Container(
+                    margin: EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                      //border radius 20
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(25),
                       ),
-                      Text(
-                        jobb.position,
-                        style: white,
-                      ),
+                      color: Color.fromARGB(255, 10, 57, 96),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Column(
+                        //cross align
+                        crossAxisAlignment: CrossAxisAlignment.start,
 
-                      Text(
-                        jobb.location,
-                        style: white,
-                      ),
-                      Container(
-                          //margin all
-                          height: 19,
-                          margin: EdgeInsets.all(5),
-                          padding: EdgeInsets.only(left: 5, right: 5),
-                          decoration: BoxDecoration(
-                            color: Colors.grey,
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                        children: [
+                          //1st
+
+                          GestureDetector(
+                            onTap: () => {
+                              print('clicked on ' + jobb.companyName),
+                              //print type of jobData
+                              print(jobData.runtimeType),
+                              print(jobs.runtimeType),
+                              //navigate push name to jobdetail page
+                              Navigator.pushNamed(context, JobDetail.routeName,
+                                  arguments: jobb),
+                            },
+                            child: Row(
+                              //space between
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Image.network(jobb.images,
+                                    height: 75, width: 75),
+                                Container(
+                                    margin: EdgeInsets.only(right: 20, top: 20),
+                                    child: Text(
+                                      jobData.salary,
+                                      style: white,
+                                    ))
+                              ],
+                            ),
                           ),
-                          child: Text(jobb.fullOrPart))
-                    ],
-                  ),
-                ),
-              );
-            }),
+                          Text(
+                            jobb.position,
+                            style: white,
+                          ),
+
+                          Text(
+                            jobb.location,
+                            style: white,
+                          ),
+                          Container(
+                              //margin all
+                              height: 19,
+                              margin: EdgeInsets.all(5),
+                              padding: EdgeInsets.only(left: 5, right: 5),
+                              decoration: BoxDecoration(
+                                color: Colors.grey,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20)),
+                              ),
+                              child: Text(jobb.fullOrPart))
+                        ],
+                      ),
+                    ),
+                  );
+                }),
           );
   }
 
@@ -223,17 +240,16 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-  Widget picBanner(deviceWidth ){
+
+  Widget picBanner(deviceWidth) {
     //get width screen
-    
+
     return Container(
-      width: deviceWidth,
-      
-      child : Image(
-        height: 200,
-        image: AssetImage('assets/banner.png'),
-      )
-    );
+        width: deviceWidth,
+        child: Image(
+          height: 200,
+          image: AssetImage('assets/banner.png'),
+        ));
   }
 
   Widget fav(workData) {

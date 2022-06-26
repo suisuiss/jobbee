@@ -2,6 +2,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 //import material dart
 import 'package:flutter/material.dart';
+import 'package:jobbee/account.dart';
 import 'package:jobbee/appliedWidget.dart';
 import 'package:jobbee/buttom.dart';
 //import nav
@@ -51,12 +52,17 @@ class _AppliedState extends State<Applied> {
                 children: [
                   //applied work
                   Text('My applied jobs', style: TextStyle(fontSize: 20)),
-                  ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: user.applied.length,
-                      itemBuilder: (context, index) {
-                        return AppliedWidget(index: index);
-                      })
+                  
+                   MediaQuery.removePadding(
+                    context: context,
+                    removeTop: true,
+                    child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: user.applied.length,
+                        itemBuilder: (context, index) {
+                          return AppliedWidget(index: index);
+                        }),
+                  )
                 ],
               ),
             )),

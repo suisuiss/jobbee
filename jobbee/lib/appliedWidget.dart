@@ -34,29 +34,21 @@ class _AppliedWidgetState extends State<AppliedWidget> {
     final job = Work.fromMap(applied['job']);
     final now = DateFormat.yMd().format(DateTime.now());
 
-    // return  Container(
-    //     child: Column(
-    //       children: [
-    //         Navbar(),
-    //         Expanded(
-    //             child: SingleChildScrollView(
-    //           child: Column(
-    //             children: [
-    //applied work
-    // Text('My applied jobs',
-    // style : TextStyle(
-    //   fontSize: 20
-    // )
-
-    // ),
+     
 
     return 
       Container(
       height: 170,
-      width: deviceWidth * 0.72,
+      width: deviceWidth  ,
       //margin all
       // margin top
-      margin: EdgeInsets.only(top: 20),
+       //padding left right
+      padding: EdgeInsets.only(
+          left:15, right: 15, top: 15),
+       
+      margin: EdgeInsets.only(top: 20,
+      left: deviceWidth * 0.03, right: deviceWidth * 0.03,
+      ),
       decoration: BoxDecoration(
         color: Color.fromARGB(255, 10, 57, 96),
         borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -70,8 +62,9 @@ class _AppliedWidgetState extends State<AppliedWidget> {
             children: [
               Image.network(job.images, height: 75, width: 75),
               Container(
-                  margin: EdgeInsets.only(right: 20, top: 20),
-                  child: Text(
+                  margin: EdgeInsets.only(right: 5, top: 20),
+                  child: 
+                  Text(
                     'Applied date:' + now.toString(),
                     style: white,
                   ))
