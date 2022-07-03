@@ -7,6 +7,7 @@ import 'package:jobbee/buttom.dart';
 import 'package:jobbee/model.dart/job.dart';
 import 'package:jobbee/model.dart/work.dart';
 import 'package:jobbee/nav.dart';
+import 'package:jobbee/provider/loader.dart';
 import 'package:jobbee/searchWidget.dart';
 import 'package:jobbee/services/homeService.dart';
 import 'package:jobbee/services/searchService.dart';
@@ -19,7 +20,7 @@ class SearchResult extends StatefulWidget {
 }
 
 class _SearchResultState extends State<SearchResult> {
-  List<Work>?works;
+  List<Work>? works;
   final HomeService homeService = HomeService();
   List<Job> jobs = [];
   String query = '';
@@ -31,8 +32,6 @@ class _SearchResultState extends State<SearchResult> {
     init();
     fetchAllWork();
   }
-
-   
 
   fetchAllWork() async {
     works = await homeService.fetchAllWorks(context);
@@ -63,38 +62,41 @@ class _SearchResultState extends State<SearchResult> {
   @override
   Widget build(BuildContext context) {
     final isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom == 0;
-    return Scaffold(
-      body: Column(
-        children: <Widget>[
-          buildSearch(),
-          Expanded(
-            child: ListView.builder(
-              itemCount: jobs.length,
-              itemBuilder: (context, index) {
-                final job = jobs[index];
-                final work = works![index];
-                return GestureDetector(
-        onTap: () => {
-          Navigator.pushNamed(context, '/jobDetail', arguments: work),
-        },
-        child: ListTile(
-          leading: Image.network(
-            job.images,
-            fit: BoxFit.cover,
-            width: 50,
-            height: 50,
-          ),
-          title: Text(job.position),
-          subtitle: Text(job.companyName + ' ' + job.location),
-        ),
-      );
-              },
+    return works == null
+        ? const Loader()
+        : Scaffold(
+            body: Column(
+              children: <Widget>[
+                buildSearch(),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: jobs.length,
+                    itemBuilder: (context, index) {
+                      final job = jobs[index];
+                      final work = works![index];
+                      return GestureDetector(
+                        onTap: () => {
+                          Navigator.pushNamed(context, '/jobDetail',
+                              arguments: work),
+                        },
+                        child: ListTile(
+                          leading: Image.network(
+                            job.images,
+                            fit: BoxFit.cover,
+                            width: 50,
+                            height: 50,
+                          ),
+                          title: Text(job.position),
+                          subtitle: Text(job.companyName + ' ' + job.location),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                isKeyboardOpen ? Buttom() : Container()
+              ],
             ),
-          ),
-          isKeyboardOpen ? Buttom() : Container()
-        ],
-      ),
-    );
+          );
   }
 
   Widget buildSearch() => SearchWidget(
@@ -113,8 +115,6 @@ class _SearchResultState extends State<SearchResult> {
           this.jobs = jobs;
         });
       });
-
-  
 }
 
   // @override
