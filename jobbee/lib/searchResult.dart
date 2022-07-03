@@ -62,7 +62,7 @@ class _SearchResultState extends State<SearchResult> {
   @override
   Widget build(BuildContext context) {
     final isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom == 0;
-    return jobs == null
+    return works == null
         ? const Loader()
         : Scaffold(
             body: Column(
