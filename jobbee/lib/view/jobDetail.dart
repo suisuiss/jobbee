@@ -327,52 +327,78 @@ class _JobDetailState extends State<JobDetail> {
   }
 
   Widget Des(JobDe) {
-    return Container(
-      child: ListView(
-        children: <Widget>[
-          SizedBox(height: 25.0),
-          Text(
-            "Job Responsibilities",
-            style: TextStyle(
-              fontSize: 16.0,
-              color: Color(0xFF21202A),
-              fontWeight: FontWeight.w400,
-            ).copyWith(fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: 15.0),
-          Text(
-            JobDe.jobRes,
-            style: TextStyle(
-              fontSize: 14.0,
-              color: Color(0xFF21202A),
-            ).copyWith(
-              fontWeight: FontWeight.w300,
-              height: 1.5,
-              color: Color(0xFF5B5B5B),
+    return 
+    Center(
+      child: Container(
+        child: ListView(
+          scrollDirection: Axis.vertical,
+          children: <Widget>[
+            SizedBox(height: 25.0),
+            Text(
+              "Job Responsibilities",
+              style: TextStyle(
+                fontSize: 16.0,
+                color: Color(0xFF21202A),
+                fontWeight: FontWeight.w400,
+              ).copyWith(fontWeight: FontWeight.bold),
             ),
-          ),
-          SizedBox(height: 25.0),
-          Text(
-            "Benefits",
-            style: TextStyle(
-              fontSize: 16.0,
-              color: Color(0xFF21202A),
-              fontWeight: FontWeight.w400,
-            ).copyWith(fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: 15.0),
-          Text(
-            JobDe.benefits,
-            style: TextStyle(
-              fontSize: 14.0,
-              color: Color(0xFF21202A),
-            ).copyWith(
-              fontWeight: FontWeight.w300,
-              height: 1.5,
-              color: Color(0xFF5B5B5B),
+            SizedBox(height: 15.0),
+            Text(
+              JobDe.jobRes,
+              style: TextStyle(
+                fontSize: 14.0,
+                color: Color(0xFF21202A),
+              ).copyWith(
+                fontWeight: FontWeight.w300,
+                height: 1.5,
+                color: Color(0xFF5B5B5B),
+              ),
             ),
-          ),
-        ],
+            SizedBox(height: 25.0),
+            Text(
+              "Benefits",
+              style: TextStyle(
+                fontSize: 16.0,
+                color: Color(0xFF21202A),
+                fontWeight: FontWeight.w400,
+              ).copyWith(fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 15.0),
+            Text(
+               
+              JobDe.benefits,
+              style: TextStyle(
+                fontSize: 14.0,
+                color: Color(0xFF21202A),
+              ).copyWith(
+                fontWeight: FontWeight.w300,
+                height: 1.5,
+                color: Color(0xFF5B5B5B),
+              ),
+            ),
+            SizedBox(height: 25.0),
+            Text(
+              "Location",
+              style: TextStyle(
+                fontSize: 16.0,
+                color: Color(0xFF21202A),
+                fontWeight: FontWeight.w400,
+              ).copyWith(fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 15.0),
+            Text(
+              JobDe.location,
+              style: TextStyle(
+                fontSize: 14.0,
+                color: Color(0xFF21202A),
+              ).copyWith(
+                fontWeight: FontWeight.w300,
+                height: 1.5,
+                color: Color(0xFF5B5B5B),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

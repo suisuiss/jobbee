@@ -123,6 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         removeTop: true,
                          context:context,
                         child: ListView.builder(
+                          
                           itemCount: user.favorite.length,
                           shrinkWrap: true,
                           itemBuilder: (context, index) {

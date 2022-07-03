@@ -7,6 +7,7 @@ import 'package:jobbee/model.dart/work.dart';
 import 'package:jobbee/nav.dart';
 import 'package:jobbee/provider/userProvider.dart';
 import 'package:jobbee/services/appliedService.dart';
+import 'package:jobbee/view/jobDetail.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/date_symbol_data_file.dart';
 
@@ -37,59 +38,76 @@ class _AppliedWidgetState extends State<AppliedWidget> {
      
 
     return 
-      Container(
-      height: 170,
-      width: deviceWidth  ,
-      //margin all
-      // margin top
-       //padding left right
-      padding: EdgeInsets.only(
-          left:15, right: 15, top: 15),
-       
-      margin: EdgeInsets.only(top: 20,
-      left: deviceWidth * 0.03, right: deviceWidth * 0.03,
-      ),
-      decoration: BoxDecoration(
-        color: Color.fromARGB(255, 10, 57, 96),
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-      ),
-      child: Column(
-        children: [
-          Row(
-            //space between
+      SingleChildScrollView(
+        child: 
+        GestureDetector(
+          onTap: () => {
+                  //navigate push name to jobdetail page
+                  Navigator.pushNamed(context, JobDetail.routeName,
+                      arguments: job),
+                },
+          child: Container(
+          height: 170,
+          width: deviceWidth  ,
+          //margin all
+          // margin top
+           //padding left right
+          padding: EdgeInsets.only(
+              left:15, right: 15, top: 15),
+           
+          margin: EdgeInsets.only(top: 0,
+          left: deviceWidth * 0.03, right: deviceWidth * 0.03,
+          bottom: 20
+          ),
+          decoration: BoxDecoration(
+            color: Color.fromARGB(255, 10, 57, 96),
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+          ),
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Image.network(job.images, height: 75, width: 75),
+              Row(
+                //space between
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Image.network(job.images, height: 75, width: 75),
+                  Container(
+                      margin: EdgeInsets.only(right: 5, top: 20),
+                      child: 
+                      Text(
+                        'Applied date:' + now.toString(),
+                        style: white,
+                      ))
+                ],
+              ),
+              Text(
+               
+                job.position,
+                //style whitee with bold fontsize
+                style: white.copyWith(fontSize: 20, fontWeight: FontWeight.bold),
+                 //font size 20
+                 
+
+              ),
+              Text(
+                job.location,
+                style: white,
+              ),
               Container(
-                  margin: EdgeInsets.only(right: 5, top: 20),
-                  child: 
-                  Text(
-                    'Applied date:' + now.toString(),
-                    style: white,
-                  ))
+                  //margin all
+                  height: 19,
+                  margin: EdgeInsets.all(5),
+                  padding: EdgeInsets.only(left: 5, right: 5),
+                  decoration: BoxDecoration(
+                    color: Colors.grey,
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                  ),
+                  child: Text(job.fullOrPart))
             ],
           ),
-          Text(
-            job.position,
-            style: white,
-          ),
-          Text(
-            job.location,
-            style: white,
-          ),
-          Container(
-              //margin all
-              height: 19,
-              margin: EdgeInsets.all(5),
-              padding: EdgeInsets.only(left: 5, right: 5),
-              decoration: BoxDecoration(
-                color: Colors.grey,
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-              ),
-              child: Text(job.fullOrPart))
-        ],
-      ),
-    );
+    ),
+        ),
+      );
   }
 }

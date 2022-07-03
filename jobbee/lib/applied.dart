@@ -28,7 +28,7 @@ class _AppliedState extends State<Applied> {
     //screen width
     final user = Provider.of<UserProvider>(context).user;
 
-  //  final deviceWidth = MediaQuery.of(context).size.width;
+    //  final deviceWidth = MediaQuery.of(context).size.width;
     var date = '2022 / 12 /12';
     List<Work> appliedWork = [
       //work data
@@ -52,11 +52,15 @@ class _AppliedState extends State<Applied> {
                 children: [
                   //applied work
                   Text('My applied jobs', style: TextStyle(fontSize: 20)),
-                  
-                   MediaQuery.removePadding(
+                  SizedBox(
+                    height: 20,
+                  ),
+
+                  MediaQuery.removePadding(
                     context: context,
                     removeTop: true,
                     child: ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemCount: user.applied.length,
                         itemBuilder: (context, index) {
