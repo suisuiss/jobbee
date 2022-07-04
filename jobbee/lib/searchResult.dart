@@ -22,7 +22,7 @@ class SearchResult extends StatefulWidget {
 class _SearchResultState extends State<SearchResult> {
   List<Work>? works;
   final HomeService homeService = HomeService();
-  List<Job> jobs = [];
+  //List<Job> jobs = [];
   String query = '';
   Timer? deboucer;
 
@@ -56,7 +56,7 @@ class _SearchResultState extends State<SearchResult> {
 
   Future init() async {
     final jobs = await SearchService.getJobs(query);
-    setState(() => this.jobs = jobs);
+    setState(() => this.works = jobs);
   }
 
   @override
@@ -70,9 +70,9 @@ class _SearchResultState extends State<SearchResult> {
                 buildSearch(),
                 Expanded(
                   child: ListView.builder(
-                    itemCount: jobs.length,
+                    itemCount: works!.length,
                     itemBuilder: (context, index) {
-                      final job = jobs[index];
+                      //final job = works![index];
                       final work = works![index];
                       return GestureDetector(
                         onTap: () => {
@@ -81,13 +81,13 @@ class _SearchResultState extends State<SearchResult> {
                         },
                         child: ListTile(
                           leading: Image.network(
-                            job.images,
+                            work.images,
                             fit: BoxFit.cover,
                             width: 50,
                             height: 50,
                           ),
-                          title: Text(job.position),
-                          subtitle: Text(job.companyName + ' ' + job.location),
+                          title: Text(work.position),
+                          subtitle: Text(work.companyName + ' ' + work.location),
                         ),
                       );
                     },
@@ -112,7 +112,7 @@ class _SearchResultState extends State<SearchResult> {
 
         setState(() {
           this.query = query;
-          this.jobs = jobs;
+          this.works = jobs;
         });
       });
 }
