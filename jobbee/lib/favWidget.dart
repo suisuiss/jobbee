@@ -31,14 +31,13 @@ class _FavwidgetState extends State<Favwidget> {
     return Center(
         child: Container(
       child: Column(
-        children: [          
+        children: [
           Padding(
             //padding left
             padding: EdgeInsets.only(
                 left: MediaQuery.of(context).size.width * 0.07,
                 bottom: 5,
                 top: 0),
-           
           ),
           Row(
             children: [
@@ -88,9 +87,13 @@ class _FavwidgetState extends State<Favwidget> {
                               job.position,
                               style: style,
                             ),
-                            Text(
-                              job.location,
-                            ),
+                            Container(
+                              width: 200,
+                              child: Text(
+                                  job.location,
+                                  //'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+                                  overflow: TextOverflow.ellipsis),
+                            )
                           ],
                         ),
                       )

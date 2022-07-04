@@ -206,6 +206,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Text(
                             jobb.location,
                             style: white,
+                            overflow: TextOverflow.ellipsis
                           ),
                           Container(
                               //margin all
